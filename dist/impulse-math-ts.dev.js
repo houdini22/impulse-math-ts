@@ -1297,18 +1297,21 @@ var __webpack_exports__ = {};
   \********************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComputationCPU": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.ComputationCPU),
+/* harmony export */   "ComputationGPU": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.ComputationGPU),
 /* harmony export */   "Matrix": () => (/* reexport safe */ _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix),
-/* harmony export */   "math": () => (/* binding */ math)
+/* harmony export */   "getComputation": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.getComputation),
+/* harmony export */   "im2col": () => (/* reexport safe */ _Math_math__WEBPACK_IMPORTED_MODULE_1__.im2col),
+/* harmony export */   "maxpool": () => (/* reexport safe */ _Math_math__WEBPACK_IMPORTED_MODULE_1__.maxpool),
+/* harmony export */   "round": () => (/* reexport safe */ _Math_math__WEBPACK_IMPORTED_MODULE_1__.round),
+/* harmony export */   "setComputation": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.setComputation)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Math/Matrix */ "./src/typescript/Math/Matrix.ts");
 /* harmony import */ var _Math_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Math/math */ "./src/typescript/Math/math.ts");
+/* harmony import */ var _Computation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Computation */ "./src/typescript/Computation/index.ts");
 
 
-var math = {
-  maxpool: _Math_math__WEBPACK_IMPORTED_MODULE_1__.maxpool,
-  round: _Math_math__WEBPACK_IMPORTED_MODULE_1__.round,
-  im2col: _Math_math__WEBPACK_IMPORTED_MODULE_1__.im2col
-};
+
 
 })();
 

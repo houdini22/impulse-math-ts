@@ -1,6 +1,5 @@
 import { Matrix } from "./Math/Matrix";
 import { maxpool, round, im2col } from "./Math/math";
+import { ComputationGPU, ComputationCPU, setComputation, getComputation } from "./Computation";
 
-const math = { maxpool, round, im2col };
-
-export { Matrix, math };
+export { Matrix, maxpool, round, im2col, ComputationGPU, ComputationCPU, setComputation, getComputation };
