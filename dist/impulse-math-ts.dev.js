@@ -974,24 +974,24 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "subtract",
     value: function subtract(m) {
-      if (m instanceof Matrix) {
-        if (this.rows !== m.rows || this.cols !== m.cols) {
-          throw new Error("Dimensions error: ".concat(this.rows, ", ").concat(this.cols, " !== ").concat(m.rows, ", ").concat(m.cols));
-        }
+      if (typeof m === "number") {
         var data = [];
         for (var row = 0; row < this.rows; row += 1) {
           data[row] = [];
           for (var col = 0; col < this.cols; col += 1) {
-            data[row][col] = this.data[row][col] - m.data[row][col];
+            data[row][col] = this.data[row][col] - m;
           }
         }
         return Matrix.from(data);
       } else {
+        if (this.rows !== m.rows || this.cols !== m.cols) {
+          throw new Error("Dimensions error: ".concat(this.rows, ", ").concat(this.cols, " !== ").concat(m.rows, ", ").concat(m.cols));
+        }
         var _data2 = [];
         for (var _row6 = 0; _row6 < this.rows; _row6 += 1) {
           _data2[_row6] = [];
           for (var _col4 = 0; _col4 < this.cols; _col4 += 1) {
-            _data2[_row6][_col4] = this.data[_row6][_col4] - m;
+            _data2[_row6][_col4] = this.data[_row6][_col4] - m.data[_row6][_col4];
           }
         }
         return Matrix.from(_data2);

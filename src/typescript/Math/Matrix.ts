@@ -345,7 +345,16 @@ export class Matrix {
   }
 
   subtract(m: Matrix | number): Matrix {
-    if (m instanceof Matrix) {
+    if (typeof m === "number") {
+      const data = [];
+      for (let row = 0; row < this.rows; row += 1) {
+        data[row] = [];
+        for (let col = 0; col < this.cols; col += 1) {
+          data[row][col] = this.data[row][col] - m;
+        }
+      }
+      return Matrix.from(data);
+    } else {
       if (this.rows !== m.rows || this.cols !== m.cols) {
         throw new Error(`Dimensions error: ${this.rows}, ${this.cols} !== ${m.rows}, ${m.cols}`);
       }
@@ -354,15 +363,6 @@ export class Matrix {
         data[row] = [];
         for (let col = 0; col < this.cols; col += 1) {
           data[row][col] = this.data[row][col] - m.data[row][col];
-        }
-      }
-      return Matrix.from(data);
-    } else {
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] - m;
         }
       }
       return Matrix.from(data);
