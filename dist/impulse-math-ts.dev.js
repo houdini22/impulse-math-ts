@@ -116,7 +116,7 @@ var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
     var _this;
     _classCallCheck(this, ComputationCPU);
     _this = _super.call(this);
-    _this.addKernel("multiply", _CPU_dot__WEBPACK_IMPORTED_MODULE_1__.dot);
+    _this.addKernel("dot", _CPU_dot__WEBPACK_IMPORTED_MODULE_1__.dot);
     /*this.addKernel("add", add);
     this.addKernel("subtract", subtract);
     this.addKernel("subtractFromNumber", subtractFromNumber);

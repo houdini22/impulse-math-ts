@@ -6,7 +6,7 @@ export class ComputationCPU extends AbstractComputation {
   constructor() {
     super();
 
-    this.addKernel("multiply", dot);
+    this.addKernel("dot", dot);
     /*this.addKernel("add", add);
     this.addKernel("subtract", subtract);
     this.addKernel("subtractFromNumber", subtractFromNumber);
