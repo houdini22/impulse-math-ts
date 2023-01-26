@@ -270,9 +270,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getComputation": () => (/* binding */ getComputation),
 /* harmony export */   "setComputation": () => (/* binding */ setComputation)
 /* harmony export */ });
-/* harmony import */ var _ComputationMultiCore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComputationMultiCore */ "./src/typescript/Computation/ComputationMultiCore.ts");
+/* harmony import */ var _ComputationCPU__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComputationCPU */ "./src/typescript/Computation/ComputationCPU.ts");
 
-var currentComputation = new _ComputationMultiCore__WEBPACK_IMPORTED_MODULE_0__.ComputationMultiCore();
+var currentComputation = new _ComputationCPU__WEBPACK_IMPORTED_MODULE_0__.ComputationCPU();
 var setComputation = function setComputation(type) {
   currentComputation = type;
 };
