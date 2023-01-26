@@ -1,6 +1,6 @@
 {
   "name": "impulse-math-ts",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Math Neural Network Library.",
   "devDependencies": {
     "@babel/cli": "^7.20.7",
