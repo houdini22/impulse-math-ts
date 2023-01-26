@@ -1,0 +1,1 @@
+cmd_Debug/obj.target/computation.node := g++ -o Debug/obj.target/computation.node -shared -pthread -rdynamic -m64 -L/usr/local/lib  -Wl,-soname=computation.node -Wl,--start-group Debug/obj.target/computation/src/cpp/bindings.o -Wl,--end-group 

@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/typescript/Computation/AbstractComputation.ts":
@@ -8,6 +7,7 @@
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AbstractComputation": () => (/* binding */ AbstractComputation)
@@ -47,214 +47,19 @@ var AbstractComputation = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./src/typescript/Computation/ComputationCPU.ts":
-/*!******************************************************!*\
-  !*** ./src/typescript/Computation/ComputationCPU.ts ***!
-  \******************************************************/
+/***/ "./src/typescript/Computation/CPU/dot.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/dot.ts ***!
+  \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ComputationCPU": () => (/* binding */ ComputationCPU),
-/* harmony export */   "add": () => (/* binding */ add),
-/* harmony export */   "addNumber": () => (/* binding */ addNumber),
-/* harmony export */   "divideNumber": () => (/* binding */ divideNumber),
-/* harmony export */   "dot": () => (/* binding */ dot),
-/* harmony export */   "elementWiseDivide": () => (/* binding */ elementWiseDivide),
-/* harmony export */   "elementWiseMultiply": () => (/* binding */ elementWiseMultiply),
-/* harmony export */   "fillRandom": () => (/* binding */ fillRandom),
-/* harmony export */   "fillZeros": () => (/* binding */ fillZeros),
-/* harmony export */   "log": () => (/* binding */ log),
-/* harmony export */   "logMinusOne": () => (/* binding */ logMinusOne),
-/* harmony export */   "logisticActivation": () => (/* binding */ logisticActivation),
-/* harmony export */   "logisticBackpropagation": () => (/* binding */ logisticBackpropagation),
-/* harmony export */   "logisticLoss": () => (/* binding */ logisticLoss),
-/* harmony export */   "multiplyNumber": () => (/* binding */ multiplyNumber),
-/* harmony export */   "penalty": () => (/* binding */ penalty),
-/* harmony export */   "pow": () => (/* binding */ pow),
-/* harmony export */   "purelinLoss": () => (/* binding */ purelinLoss),
-/* harmony export */   "reluActivation": () => (/* binding */ reluActivation),
-/* harmony export */   "reluBackpropagation": () => (/* binding */ reluBackpropagation),
-/* harmony export */   "setOnes": () => (/* binding */ setOnes),
-/* harmony export */   "softplusActivation": () => (/* binding */ softplusActivation),
-/* harmony export */   "sqrt": () => (/* binding */ sqrt),
-/* harmony export */   "subtract": () => (/* binding */ subtract),
-/* harmony export */   "subtractFromNumber": () => (/* binding */ subtractFromNumber),
-/* harmony export */   "tanhActivation": () => (/* binding */ tanhActivation),
-/* harmony export */   "transpose": () => (/* binding */ transpose)
+/* harmony export */   "dot": () => (/* binding */ dot)
 /* harmony export */ });
-/* harmony import */ var _AbstractComputation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractComputation */ "./src/typescript/Computation/AbstractComputation.ts");
-/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
 
-
-var elementWiseDivide = function elementWiseDivide(m1, m2) {
-  if (m1.rows !== m2.rows) {
-    throw new Error("ROWS number not equal.");
-  }
-  if (m1.cols !== m2.cols) {
-    throw new Error("COLS number not equal.");
-  }
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = m1.data[row][col] / m2.data[row][col];
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m2.cols, data);
-};
-var divideNumber = function divideNumber(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = m1.data[row][col] / num;
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var logisticActivation = function logisticActivation(m) {
-  var data = [];
-  for (var row = 0; row < m.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m.cols; col += 1) {
-      data[row][col] = 1.0 / (1.0 + Math.exp(-m.data[row][col]));
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix.from(data);
-};
-var logisticLoss = function logisticLoss(output, predictions) {
-  var log = [];
-  var epsilon = 1e-8;
-  for (var row = 0; row < predictions.rows; row += 1) {
-    log[row] = [];
-    for (var col = 0; col < predictions.cols; col += 1) {
-      if (predictions.data) {
-        log[row][col] = Math.log(predictions.data[row][col] + epsilon);
-      }
-    }
-  }
-  var firstMatrix = elementWiseMultiply(new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(predictions.rows, predictions.cols, log), output);
-  var sub = [];
-  for (var _row = 0; _row < output.rows; _row += 1) {
-    sub[_row] = [];
-    for (var _col = 0; _col < output.cols; _col += 1) {
-      if (output.data) {
-        sub[_row][_col] = 1.0 - output.data[_row][_col];
-      }
-    }
-  }
-  var toMultiply2 = new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(output.rows, output.cols, sub);
-  var data = [];
-  for (var _row2 = 0; _row2 < predictions.rows; _row2 += 1) {
-    data[_row2] = [];
-    for (var _col2 = 0; _col2 < predictions.cols; _col2 += 1) {
-      if (predictions.data) {
-        data[_row2][_col2] = Math.log(1.0 - predictions.data[_row2][_col2] + epsilon);
-      }
-    }
-  }
-  var toMultiply1 = new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(predictions.rows, predictions.cols, data);
-  return add(elementWiseMultiply(multiplyNumber(firstMatrix, -1), output), elementWiseMultiply(multiplyNumber(toMultiply1, -1), subtractFromNumber(toMultiply2, 1))).sum();
-};
-var logisticBackpropagation = function logisticBackpropagation(sigma, oldY) {
-  return logisticActivation(oldY).multiply(logisticActivation(oldY).minusOne());
-};
-var tanhActivation = function tanhActivation(m) {
-  var data = [];
-  for (var row = 0; row < m.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m.cols; col += 1) {
-      data[row][col] = (1 - Math.exp(-2 * m.data[row][col])) / (1 + Math.exp(-2 * m.data[row][col]));
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix.from(data);
-};
-var reluActivation = function reluActivation(m) {
-  var data = [];
-  for (var row = 0; row < m.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m.cols; col += 1) {
-      if (m.data) {
-        data[row][col] = Math.max(0.0, m.data[row][col]);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m.rows, m.cols, data);
-};
-var reluBackpropagation = function reluBackpropagation(sigma, oldY) {
-  var data = [];
-  for (var row = 0; row < sigma.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < sigma.cols; col += 1) {
-      if (sigma.data) {
-        data[row][col] = oldY.data[row][col] > 0 ? 1 : 0;
-      }
-    }
-  }
-  return elementWiseMultiply(new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(sigma.rows, sigma.cols, data), sigma);
-};
-var softplusActivation = function softplusActivation(m) {
-  var data = [];
-  for (var row = 0; row < m.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m.cols; col += 1) {
-      if (m.data) {
-        data[row][col] = Math.log(1 + Math.exp(m.data[row][col]));
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m.rows, m.cols, data);
-};
-var penalty = function penalty(m) {
-  var data = [];
-  for (var row = 0; row < m.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m.cols; col += 1) {
-      if (m.data) {
-        data[row][col] = Math.pow(m.data[row][col], 2);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m.rows, m.cols, data).sum();
-};
-var sqrt = function sqrt(m) {
-  var data = [];
-  for (var row = 0; row < m.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m.cols; col += 1) {
-      if (m.data) {
-        data[row][col] = Math.sqrt(m.data[row][col] + 1e-8);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m.rows, m.cols, data);
-};
-var purelinLoss = function purelinLoss(output, predictions) {
-  var data = [];
-  for (var row = 0; row < output.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < output.cols; col += 1) {
-      if (output.data) {
-        data[row][col] = output.data[row][col] - Math.pow(predictions[row][col], 2);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(output.rows, output.cols, data).sum();
-};
 var dot = function dot(m1, m2) {
   if (m1.cols !== m2.rows) {
     throw new Error("DIMENSIONS error. m1.cols ".concat(m1.rows, " ").concat(m1.cols, " !== m2.rows ").concat(m2.rows, " ").concat(m2.cols, "."));
@@ -271,224 +76,24 @@ var dot = function dot(m1, m2) {
       }
     }
   }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m2.cols, data);
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m2.cols, data);
 };
-var add = function add(m1, m2) {
-  if (m1.rows !== m2.rows) {
-    throw new Error("ROWS number not equal.");
-  }
-  if (m1.cols !== m2.cols) {
-    throw new Error("COLS number not equal. m1.cols ".concat(m1.cols, " !== m2.cols ").concat(m2.cols));
-  }
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data && m2.data) {
-        data[row][col] = m1.data[row][col] + m2.data[row][col];
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var subtract = function subtract(m1, m2) {
-  if (m1.rows !== m2.rows) {
-    throw new Error("ROWS number not equal: m1.rows ".concat(m1.rows, " !== m2.rows ").concat(m2.rows));
-  }
-  if (m1.cols !== m2.cols) {
-    throw new Error("COLS number not equal: m1.cols ".concat(m1.cols, " !== m2.cols ").concat(m2.cols));
-  }
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data && m2.data) {
-        data[row][col] = m1.data[row][col] - m2.data[row][col];
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var fillRandom = function fillRandom(m1, parameter) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = (Math.random() * 4 - 2) * Math.sqrt(2 / parameter); // todo: gaussian distribution
-    }
-  }
-
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var fillZeros = function fillZeros(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = 0;
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var setOnes = function setOnes(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = 1;
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var elementWiseMultiply = function elementWiseMultiply(m1, m2) {
-  if (m1.rows !== m2.rows) {
-    throw new Error("ROWS number not equal: m1.rows ".concat(m1.rows, " !== m2.rows ").concat(m2.rows));
-  }
-  if (m1.cols !== m2.cols) {
-    throw new Error("COLS number not equal: m1.cols ".concat(m1.cols, " !== m2.cols ").concat(m2.cols));
-  }
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data && m2.data) {
-        data[row][col] = m1.data[row][col] * m2.data[row][col];
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var multiplyNumber = function multiplyNumber(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data) {
-        data[row][col] = m1.data[row][col] * num;
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var subtractFromNumber = function subtractFromNumber(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data) {
-        data[row][col] = num - m1.data[row][col];
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var pow = function pow(m1, _pow) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data) {
-        data[row][col] = Math.pow(m1.data[row][col], _pow);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var log = function log(m1, pow) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data) {
-        data[row][col] = Math.log(m1.data[row][col] + 1e-8);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var logMinusOne = function logMinusOne(m1, pow) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      if (m1.data) {
-        data[row][col] = Math.log(1 - m1.data[row][col]);
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var addNumber = function addNumber(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = m1.data[row][col] + num;
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m1.rows, m1.cols, data);
-};
-var transpose = function transpose(m) {
-  var data = [];
-  for (var col = 0; col < m.cols; col += 1) {
-    data[col] = [];
-    for (var row = 0; row < m.rows; row += 1) {
-      if (m.data) {
-        data[col][row] = m.data[row][col];
-      }
-    }
-  }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_1__.Matrix(m.cols, m.rows, data);
-};
-var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
-  _inherits(ComputationCPU, _AbstractComputation);
-  var _super = _createSuper(ComputationCPU);
-  function ComputationCPU() {
-    var _this;
-    _classCallCheck(this, ComputationCPU);
-    _this = _super.call(this);
-    _this.addKernel("multiply", dot);
-    _this.addKernel("add", add);
-    _this.addKernel("subtract", subtract);
-    _this.addKernel("subtractFromNumber", subtractFromNumber);
-    _this.addKernel("fillRandom", fillRandom);
-    _this.addKernel("fillZeros", fillZeros);
-    _this.addKernel("elementWiseMultiply", elementWiseMultiply);
-    _this.addKernel("multiplyNumber", multiplyNumber);
-    _this.addKernel("elementWiseDivide", elementWiseDivide);
-    _this.addKernel("divideNumber", divideNumber);
-    _this.addKernel("logisticActivation", logisticActivation);
-    _this.addKernel("logisticLoss", logisticLoss);
-    _this.addKernel("logisticBackpropagation", logisticBackpropagation);
-    _this.addKernel("tanhActivation", tanhActivation);
-    _this.addKernel("reluActivation", reluActivation);
-    _this.addKernel("reluBackpropagation", reluBackpropagation);
-    _this.addKernel("softplusActivation", softplusActivation);
-    _this.addKernel("penalty", penalty);
-    _this.addKernel("sqrt", sqrt);
-    _this.addKernel("transpose", transpose);
-    _this.addKernel("pow", pow);
-    _this.addKernel("log", log);
-    _this.addKernel("logMinusOne", logMinusOne);
-    _this.addKernel("addNumber", addNumber);
-    return _this;
-  }
-  return _createClass(ComputationCPU);
-}(_AbstractComputation__WEBPACK_IMPORTED_MODULE_0__.AbstractComputation);
 
 /***/ }),
 
-/***/ "./src/typescript/Computation/ComputationGPU.ts":
+/***/ "./src/typescript/Computation/ComputationCPU.ts":
 /*!******************************************************!*\
-  !*** ./src/typescript/Computation/ComputationGPU.ts ***!
+  !*** ./src/typescript/Computation/ComputationCPU.ts ***!
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ComputationGPU": () => (/* binding */ ComputationGPU)
+/* harmony export */   "ComputationCPU": () => (/* binding */ ComputationCPU)
 /* harmony export */ });
 /* harmony import */ var _AbstractComputation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractComputation */ "./src/typescript/Computation/AbstractComputation.ts");
+/* harmony import */ var _CPU_dot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CPU/dot */ "./src/typescript/Computation/CPU/dot.ts");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -503,12 +108,82 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var ComputationGPU = /*#__PURE__*/function (_AbstractComputation) {
-  _inherits(ComputationGPU, _AbstractComputation);
-  var _super = _createSuper(ComputationGPU);
-  function ComputationGPU() {
-    _classCallCheck(this, ComputationGPU);
-    return _super.call(this);
+
+var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
+  _inherits(ComputationCPU, _AbstractComputation);
+  var _super = _createSuper(ComputationCPU);
+  function ComputationCPU() {
+    var _this;
+    _classCallCheck(this, ComputationCPU);
+    _this = _super.call(this);
+    _this.addKernel("multiply", _CPU_dot__WEBPACK_IMPORTED_MODULE_1__.dot);
+    /*this.addKernel("add", add);
+    this.addKernel("subtract", subtract);
+    this.addKernel("subtractFromNumber", subtractFromNumber);
+    this.addKernel("fillRandom", fillRandom);
+    this.addKernel("fillZeros", fillZeros);
+    this.addKernel("elementWiseMultiply", elementWiseMultiply);
+    this.addKernel("multiplyNumber", multiplyNumber);
+    this.addKernel("elementWiseDivide", elementWiseDivide);
+    this.addKernel("divideNumber", divideNumber);
+    this.addKernel("logisticActivation", logisticActivation);
+    this.addKernel("logisticLoss", logisticLoss);
+    this.addKernel("logisticBackpropagation", logisticBackpropagation);
+    this.addKernel("tanhActivation", tanhActivation);
+    this.addKernel("reluActivation", reluActivation);
+    this.addKernel("reluBackpropagation", reluBackpropagation);
+    this.addKernel("softplusActivation", softplusActivation);
+    this.addKernel("penalty", penalty);
+    this.addKernel("sqrt", sqrt);
+    this.addKernel("transpose", transpose);
+    this.addKernel("pow", pow);
+    this.addKernel("log", log);
+    this.addKernel("logMinusOne", logMinusOne);
+    this.addKernel("addNumber", addNumber);*/
+    return _this;
+  }
+  return _createClass(ComputationCPU);
+}(_AbstractComputation__WEBPACK_IMPORTED_MODULE_0__.AbstractComputation);
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/ComputationMultiCore.ts":
+/*!************************************************************!*\
+  !*** ./src/typescript/Computation/ComputationMultiCore.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComputationMultiCore": () => (/* binding */ ComputationMultiCore)
+/* harmony export */ });
+/* harmony import */ var _AbstractComputation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractComputation */ "./src/typescript/Computation/AbstractComputation.ts");
+/* harmony import */ var _MultiCore_dot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MultiCore/dot */ "./src/typescript/Computation/MultiCore/dot.ts");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+var ComputationMultiCore = /*#__PURE__*/function (_AbstractComputation) {
+  _inherits(ComputationMultiCore, _AbstractComputation);
+  var _super = _createSuper(ComputationMultiCore);
+  function ComputationMultiCore() {
+    var _this;
+    _classCallCheck(this, ComputationMultiCore);
+    _this = _super.call(this);
+    _this.addKernel("dot", _MultiCore_dot__WEBPACK_IMPORTED_MODULE_1__.dot);
+
     /*this.addKernel("multiply", dot);
     this.addKernel("add", add);
     this.addKernel("subtract", subtract);
@@ -529,9 +204,30 @@ var ComputationGPU = /*#__PURE__*/function (_AbstractComputation) {
     this.addKernel("sqrt", sqrt);
     this.addKernel("purelinLoss", purelinLoss);
     this.addKernel("transpose", transpose);*/
+    return _this;
   }
-  return _createClass(ComputationGPU);
+  return _createClass(ComputationMultiCore);
 }(_AbstractComputation__WEBPACK_IMPORTED_MODULE_0__.AbstractComputation);
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/MultiCore/dot.ts":
+/*!*****************************************************!*\
+  !*** ./src/typescript/Computation/MultiCore/dot.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dot": () => (/* binding */ dot)
+/* harmony export */ });
+/* harmony import */ var _build_Debug_computation_node__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../build/Debug/computation.node */ "./build/Debug/computation.node");
+/* harmony import */ var _build_Debug_computation_node__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_build_Debug_computation_node__WEBPACK_IMPORTED_MODULE_0__);
+
+var dot = function dot(m1, m2) {
+  console.log((0,_build_Debug_computation_node__WEBPACK_IMPORTED_MODULE_0__.MatrixMultiply)([1, 2, 3, 4], [4, 3, 2, 1]));
+};
 
 /***/ }),
 
@@ -541,16 +237,17 @@ var ComputationGPU = /*#__PURE__*/function (_AbstractComputation) {
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AbstractComputation": () => (/* reexport safe */ _AbstractComputation__WEBPACK_IMPORTED_MODULE_0__.AbstractComputation),
 /* harmony export */   "ComputationCPU": () => (/* reexport safe */ _ComputationCPU__WEBPACK_IMPORTED_MODULE_2__.ComputationCPU),
-/* harmony export */   "ComputationGPU": () => (/* reexport safe */ _ComputationGPU__WEBPACK_IMPORTED_MODULE_1__.ComputationGPU),
+/* harmony export */   "ComputationMultiCore": () => (/* reexport safe */ _ComputationMultiCore__WEBPACK_IMPORTED_MODULE_1__.ComputationMultiCore),
 /* harmony export */   "getComputation": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_3__.getComputation),
 /* harmony export */   "setComputation": () => (/* reexport safe */ _utils__WEBPACK_IMPORTED_MODULE_3__.setComputation)
 /* harmony export */ });
 /* harmony import */ var _AbstractComputation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractComputation */ "./src/typescript/Computation/AbstractComputation.ts");
-/* harmony import */ var _ComputationGPU__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComputationGPU */ "./src/typescript/Computation/ComputationGPU.ts");
+/* harmony import */ var _ComputationMultiCore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComputationMultiCore */ "./src/typescript/Computation/ComputationMultiCore.ts");
 /* harmony import */ var _ComputationCPU__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ComputationCPU */ "./src/typescript/Computation/ComputationCPU.ts");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/typescript/Computation/utils.ts");
 
@@ -567,14 +264,15 @@ __webpack_require__.r(__webpack_exports__);
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getComputation": () => (/* binding */ getComputation),
 /* harmony export */   "setComputation": () => (/* binding */ setComputation)
 /* harmony export */ });
-/* harmony import */ var _ComputationCPU__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComputationCPU */ "./src/typescript/Computation/ComputationCPU.ts");
+/* harmony import */ var _ComputationMultiCore__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComputationMultiCore */ "./src/typescript/Computation/ComputationMultiCore.ts");
 
-var currentComputation = new _ComputationCPU__WEBPACK_IMPORTED_MODULE_0__.ComputationCPU();
+var currentComputation = new _ComputationMultiCore__WEBPACK_IMPORTED_MODULE_0__.ComputationMultiCore();
 var setComputation = function setComputation(type) {
   currentComputation = type;
 };
@@ -590,6 +288,7 @@ var getComputation = function getComputation() {
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Matrix": () => (/* binding */ Matrix)
@@ -941,7 +640,7 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "dot",
     value: function dot(m) {
-      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("multiply", this, m);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("dot", this, m);
     }
   }, {
     key: "multiply",
@@ -1153,6 +852,14 @@ var Matrix = /*#__PURE__*/function () {
     value: function copy() {
       return Matrix.from(this.data);
     }
+  }, {
+    key: "concat",
+    value: function concat(m) {
+      for (var row = 0; row < m.rows; row += 1) {
+        this.data.push(m.data[row]);
+      }
+      return this;
+    }
   }], [{
     key: "from",
     value: function from(arr) {
@@ -1171,6 +878,7 @@ var Matrix = /*#__PURE__*/function () {
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "im2col": () => (/* binding */ im2col),
@@ -1231,6 +939,34 @@ var round = function round(num, decimalPlaces) {
   return Math.round((num + 2.23e-16) * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces);
 };
 
+/***/ }),
+
+/***/ "./build/Debug/computation.node":
+/*!**************************************!*\
+  !*** ./build/Debug/computation.node ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/* module decorator */ module = __webpack_require__.nmd(module);
+
+try {
+  process.dlopen(module, __dirname + (__webpack_require__(/*! path */ "path").sep) + __webpack_require__.p + "9e034ce62a57cddc1a2b4486c9983546.node");
+} catch (error) {
+  throw new Error('node-loader:\n' + error);
+}
+
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
+
 /***/ })
 
 /******/ 	});
@@ -1247,19 +983,34 @@ var round = function round(num, decimalPlaces) {
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
+/******/ 			id: moduleId,
+/******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -1288,17 +1039,32 @@ var round = function round(num, decimalPlaces) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/node module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		__webpack_require__.p = "";
+/******/ 	})();
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
 /*!********************************!*\
   !*** ./src/typescript/main.ts ***!
   \********************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ComputationCPU": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.ComputationCPU),
-/* harmony export */   "ComputationGPU": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.ComputationGPU),
+/* harmony export */   "ComputationMultiCore": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.ComputationMultiCore),
 /* harmony export */   "Matrix": () => (/* reexport safe */ _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix),
 /* harmony export */   "getComputation": () => (/* reexport safe */ _Computation__WEBPACK_IMPORTED_MODULE_2__.getComputation),
 /* harmony export */   "im2col": () => (/* reexport safe */ _Math_math__WEBPACK_IMPORTED_MODULE_1__.im2col),

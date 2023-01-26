@@ -1,8 +1,8 @@
 import { AbstractComputation } from "./AbstractComputation";
-import { ComputationGPU } from "./ComputationGPU";
+import { ComputationMultiCore } from "./ComputationMultiCore";
 import { ComputationCPU } from "./ComputationCPU";
 
-let currentComputation: AbstractComputation = new ComputationCPU();
+let currentComputation: AbstractComputation = new ComputationMultiCore();
 
 export const setComputation = (type: AbstractComputation): void => {
   currentComputation = type;

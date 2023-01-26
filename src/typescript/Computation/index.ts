@@ -1,6 +1,6 @@
 import { AbstractComputation } from "./AbstractComputation";
-import { ComputationGPU } from "./ComputationGPU";
+import { ComputationMultiCore } from "./ComputationMultiCore";
 import { ComputationCPU } from "./ComputationCPU";
 import { setComputation, getComputation } from "./utils";
 
-export { AbstractComputation, ComputationGPU, ComputationCPU, setComputation, getComputation };
+export { AbstractComputation, ComputationMultiCore, ComputationCPU, setComputation, getComputation };

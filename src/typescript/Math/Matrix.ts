@@ -314,7 +314,7 @@ export class Matrix {
   }
 
   dot(m: Matrix): Matrix {
-    return getComputation().execute("multiply", this, m) as Matrix;
+    return getComputation().execute("dot", this, m) as Matrix;
   }
 
   multiply(num: number | Matrix): Matrix {
@@ -515,5 +515,12 @@ export class Matrix {
 
   static from(arr: number[][]): Matrix {
     return new Matrix(arr.length, arr[0]?.length || 0, arr);
+  }
+
+  concat(m: Matrix) {
+    for (let row = 0; row < m.rows; row += 1) {
+      this.data.push(m.data[row]);
+    }
+    return this;
   }
 }

@@ -12,12 +12,13 @@ module.exports = {
   resolve: {
     extensions: [".ts"],
     alias: {
-      impulseTsToolkit: path.resolve(__dirname, "../build/Debug/impulseTsToolkit.node"),
+      "impulse-math-ts-toolkit": path.resolve(__dirname, "../build/Debug/impulse-math-ts-toolkit.node"),
     },
   },
   externals: {
-    "gpu.js": "gpu.js",
-    csvtojson: "csvtojson",
+  },
+  node: {
+    __dirname: false,
   },
   module: {
     rules: [

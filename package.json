@@ -1,6 +1,6 @@
 {
   "name": "impulse-math-ts",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Math Neural Network Library.",
   "devDependencies": {
     "@babel/cli": "^7.20.7",
@@ -25,7 +25,9 @@
     "build-prod": "webpack --config ./configs/prod.js",
     "prettier-write": "prettier --write \"src/typescript/**/*.ts\"",
     "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix"
+    "lint-fix": "eslint . --ext .ts --fix",
+    "preinstall": "node-gyp clean || true; node-gyp --debug configure build",
+    "install": "node-gyp rebuild --debug"
   },
   "license": "Copyright Michał Baniowski",
   "main": "./dist/impulse-math-ts.js"

@@ -16,7 +16,6 @@ module.exports = {
     },
   },
   externals: {
-    "gpu.js": "gpu.js",
   },
   module: {
     rules: [
