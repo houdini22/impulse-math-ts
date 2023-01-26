@@ -1,12 +1,14 @@
 import { AbstractComputation } from "./AbstractComputation";
 import { Matrix } from "../Math/Matrix";
 import { dot } from "./CPU/dot";
+import {transpose} from "./CPU/transpose";
 
 export class ComputationCPU extends AbstractComputation {
   constructor() {
     super();
 
     this.addKernel("dot", dot);
+    this.addKernel("transpose", transpose);
     /*this.addKernel("add", add);
     this.addKernel("subtract", subtract);
     this.addKernel("subtractFromNumber", subtractFromNumber);
