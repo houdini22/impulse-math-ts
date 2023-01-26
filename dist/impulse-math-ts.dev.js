@@ -81,6 +81,32 @@ var dot = function dot(m1, m2) {
 
 /***/ }),
 
+/***/ "./src/typescript/Computation/CPU/transpose.ts":
+/*!*****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/transpose.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "transpose": () => (/* binding */ transpose)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var transpose = function transpose(m1) {
+  var data = [];
+  for (var col = 0; col < m1.cols; ++col) {
+    data[col] = new Array(m1.rows);
+    for (var row = 0; row < m1.rows; ++row) {
+      data[col][row] = m1.data[row][col];
+    }
+  }
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.cols, m1.rows, data);
+};
+
+/***/ }),
+
 /***/ "./src/typescript/Computation/ComputationCPU.ts":
 /*!******************************************************!*\
   !*** ./src/typescript/Computation/ComputationCPU.ts ***!
@@ -94,6 +120,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _AbstractComputation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AbstractComputation */ "./src/typescript/Computation/AbstractComputation.ts");
 /* harmony import */ var _CPU_dot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CPU/dot */ "./src/typescript/Computation/CPU/dot.ts");
+/* harmony import */ var _CPU_transpose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CPU/transpose */ "./src/typescript/Computation/CPU/transpose.ts");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -109,6 +136,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
+
 var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
   _inherits(ComputationCPU, _AbstractComputation);
   var _super = _createSuper(ComputationCPU);
@@ -117,6 +145,7 @@ var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
     _classCallCheck(this, ComputationCPU);
     _this = _super.call(this);
     _this.addKernel("dot", _CPU_dot__WEBPACK_IMPORTED_MODULE_1__.dot);
+    _this.addKernel("transpose", _CPU_transpose__WEBPACK_IMPORTED_MODULE_2__.transpose);
     /*this.addKernel("add", add);
     this.addKernel("subtract", subtract);
     this.addKernel("subtractFromNumber", subtractFromNumber);
