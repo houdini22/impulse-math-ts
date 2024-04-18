@@ -46,6 +46,181 @@ var AbstractComputation = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/typescript/Computation/CPU/abs.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/abs.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   abs: () => (/* binding */ abs)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var abs = function abs(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.abs(m1.data[row][col]);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/add.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/add.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   add: () => (/* binding */ add)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var add = function add(m1, m) {
+  if (typeof m === "number") {
+    var data = [];
+    for (var row = 0; row < m1.rows; row += 1) {
+      data[row] = [];
+      for (var col = 0; col < m1.cols; col += 1) {
+        data[row][col] = m1.data[row][col] + m;
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  } else if (m instanceof _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix) {
+    if (m.rows !== m1.rows || m.cols !== m1.cols) {
+      throw new Error("Dimention error: rows (x: ".concat(m1.rows, ", y: ").concat(m1.cols, ") !== (x: ").concat(m.rows, ", y: ").concat(m.cols, ")"));
+    }
+    var _data = [];
+    for (var _row = 0; _row < m1.rows; _row += 1) {
+      _data[_row] = [];
+      for (var _col = 0; _col < m1.cols; _col += 1) {
+        _data[_row][_col] = m1.data[_row][_col] + m.data[_row][_col];
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+  }
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/col.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/col.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   col: () => (/* binding */ col)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var col = function col(m1, _col) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [m1.data[row][_col]];
+  }
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, 1, data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/colMaxCoeffIndex.ts":
+/*!************************************************************!*\
+  !*** ./src/typescript/Computation/CPU/colMaxCoeffIndex.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   colMaxCoeffIndex: () => (/* binding */ colMaxCoeffIndex)
+/* harmony export */ });
+var colMaxCoeffIndex = function colMaxCoeffIndex(m1, col) {
+  var maxIndex = -1;
+  var max = -Infinity;
+  for (var row = 0; row < m1.rows; row += 1) {
+    if (m1.data && m1.data[row][col] > max) {
+      max = m1.data[row][col];
+      maxIndex = row;
+    }
+  }
+  return maxIndex;
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/colwiseSum.ts":
+/*!******************************************************!*\
+  !*** ./src/typescript/Computation/CPU/colwiseSum.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   colwiseSum: () => (/* binding */ colwiseSum)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var colwiseSum = function colwiseSum(m1) {
+  var data = [];
+  var t = m1.transpose();
+  for (var row = 0; row < t.rows; row += 1) {
+    data[row] = [0];
+    for (var col = 0; col < t.cols; col += 1) {
+      data[row][0] += t.data[row][col];
+    }
+  }
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.cols, 1, data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/divide.ts":
+/*!**************************************************!*\
+  !*** ./src/typescript/Computation/CPU/divide.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   divide: () => (/* binding */ divide)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var divide = function divide(m1, num) {
+  if (typeof num === "number") {
+    var data = [];
+    for (var row = 0; row < m1.rows; row += 1) {
+      data[row] = [];
+      for (var col = 0; col < m1.cols; col += 1) {
+        data[row][col] = m1.data[row][col] / num;
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  } else {
+    if (num.rows !== m1.rows || num.cols !== m1.cols) {
+      throw new Error("Dimensions error (".concat(m1.rows, ", ").concat(m1.cols, ") !== (").concat(num.rows, ", ").concat(num.cols, ")"));
+    }
+    var _data = [];
+    for (var _row = 0; _row < m1.rows; _row += 1) {
+      _data[_row] = [];
+      for (var _col = 0; _col < m1.cols; _col += 1) {
+        _data[_row][_col] = m1.data[_row][_col] / num.data[_row][_col];
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+  }
+};
+
+/***/ }),
+
 /***/ "./src/typescript/Computation/CPU/dot.ts":
 /*!***********************************************!*\
   !*** ./src/typescript/Computation/CPU/dot.ts ***!
@@ -79,6 +254,215 @@ var dot = function dot(m1, m2) {
 
 /***/ }),
 
+/***/ "./src/typescript/Computation/CPU/exp.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/exp.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   exp: () => (/* binding */ exp)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var exp = function exp(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.exp(m1.data[row][col] + 1e-8);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/fraction.ts":
+/*!****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/fraction.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   fraction: () => (/* binding */ fraction)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var fraction = function fraction(m1, num) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = num / m1.data[row][col];
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/log.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/log.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   log: () => (/* binding */ log)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var log = function log(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.log(m1.data[row][col] + 1e-8);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/max.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/max.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   max: () => (/* binding */ max)
+/* harmony export */ });
+var max = function max(m1) {
+  var max = -Infinity;
+  for (var row = 0; row < m1.rows; row += 1) {
+    for (var col = 0; col < m1.cols; col += 1) {
+      max = Math.max(m1.data[row][col], max);
+    }
+  }
+  return max;
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/mean.ts":
+/*!************************************************!*\
+  !*** ./src/typescript/Computation/CPU/mean.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   mean: () => (/* binding */ mean)
+/* harmony export */ });
+var mean = function mean(m1) {
+  var sum = 0;
+  var numberOfElements = m1.rows * m1.cols;
+  for (var row = 0; row < m1.rows; row += 1) {
+    for (var col = 0; col < m1.cols; col += 1) {
+      sum += m1.data[row][col];
+    }
+  }
+  return sum / numberOfElements;
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/minusOne.ts":
+/*!****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/minusOne.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   minusOne: () => (/* binding */ minusOne)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var minusOne = function minusOne(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = 1 - m1.data[row][col];
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/multiply.ts":
+/*!****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/multiply.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   multiply: () => (/* binding */ multiply)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var multiply = function multiply(m1, num) {
+  if (typeof num === "number") {
+    var data = [];
+    for (var row = 0; row < m1.rows; row += 1) {
+      data[row] = [];
+      for (var col = 0; col < m1.cols; col += 1) {
+        data[row][col] = m1.data[row][col] * num;
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  } else {
+    if (num.rows !== m1.rows || m1.cols !== num.cols) {
+      throw new Error("Dimension error: ".concat(m1.shape(), " !== ").concat(num.shape()));
+    }
+    var _data = [];
+    for (var _row = 0; _row < m1.rows; _row += 1) {
+      _data[_row] = [];
+      for (var _col = 0; _col < m1.cols; _col += 1) {
+        _data[_row][_col] = m1.data[_row][_col] * num.data[_row][_col];
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+  }
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/pow.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/pow.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   pow: () => (/* binding */ pow)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var pow = function pow(m1, num) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.pow(m1.data[row][col], num);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
 /***/ "./src/typescript/Computation/CPU/reluBackpropagation.ts":
 /*!***************************************************************!*\
   !*** ./src/typescript/Computation/CPU/reluBackpropagation.ts ***!
@@ -100,6 +484,377 @@ var reluBackpropagation = function reluBackpropagation(delta, A) {
     }
   }
   return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(A.rows, A.cols, data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/replicate.ts":
+/*!*****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/replicate.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   replicate: () => (/* binding */ replicate)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var replicate = function replicate(m1, rows, cols) {
+  if (rows === 1 && m1.cols === 1 && cols > 1) {
+    var newData = [];
+    for (var row = 0; row < m1.rows; row += 1) {
+      newData[row] = [];
+      for (var col = 0; col < cols; col += 1) {
+        newData[row][col] = m1.data[row][0];
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(newData);
+  } else if (cols === 1 && m1.rows === 1 && rows > 1) {
+    var _newData = [];
+    for (var _row = 0; _row < rows; _row += 1) {
+      _newData[_row] = [];
+      for (var _col = 0; _col < m1.cols; _col += 1) {
+        _newData[_row][_col] = m1.data[0][_col];
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_newData);
+  }
+  return m1;
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/rollToColMatrix.ts":
+/*!***********************************************************!*\
+  !*** ./src/typescript/Computation/CPU/rollToColMatrix.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   rollToColMatrix: () => (/* binding */ rollToColMatrix)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var rollToColMatrix = function rollToColMatrix(m1) {
+  var data = [];
+  var _row = 0;
+  for (var row = 0; row < m1.rows; row += 1) {
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[_row] = [];
+      data[_row++][0] = m1.data[row][col];
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/row.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/row.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   row: () => (/* binding */ row)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var row = function row(m1, _row) {
+  var data = [];
+  for (var col = 0; col < m1.cols; col += 1) {
+    data[col] = [m1.data[_row][col]];
+  }
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.cols, 1, data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/rowMaxCoeffIndex.ts":
+/*!************************************************************!*\
+  !*** ./src/typescript/Computation/CPU/rowMaxCoeffIndex.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   rowMaxCoeffIndex: () => (/* binding */ rowMaxCoeffIndex)
+/* harmony export */ });
+var rowMaxCoeffIndex = function rowMaxCoeffIndex(m1, row) {
+  var maxIndex = -1;
+  var max = -Infinity;
+  for (var col = 0; col < m1.cols; col += 1) {
+    if (m1.data[row][col] > max) {
+      max = m1.data[row][col];
+      maxIndex = col;
+    }
+  }
+  return maxIndex;
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/rowwiseSum.ts":
+/*!******************************************************!*\
+  !*** ./src/typescript/Computation/CPU/rowwiseSum.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   rowwiseSum: () => (/* binding */ rowwiseSum)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var rowwiseSum = function rowwiseSum(m1) {
+  var data = [[]];
+  for (var row = 0; row < m1.rows; row += 1) {
+    var sum = 0.0;
+    for (var col = 0; col < m1.cols; col += 1) {
+      sum += m1.data[row][col];
+    }
+    data[0].push(sum);
+  }
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(1, m1.rows, data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/setMax.ts":
+/*!**************************************************!*\
+  !*** ./src/typescript/Computation/CPU/setMax.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setMax: () => (/* binding */ setMax)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var setMax = function setMax(m1, max) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.min(m1.data[row][col], max);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/setMin.ts":
+/*!**************************************************!*\
+  !*** ./src/typescript/Computation/CPU/setMin.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setMin: () => (/* binding */ setMin)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var setMin = function setMin(m1, min) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.max(m1.data[row][col], min);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/setOnes.ts":
+/*!***************************************************!*\
+  !*** ./src/typescript/Computation/CPU/setOnes.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setOnes: () => (/* binding */ setOnes)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var setOnes = function setOnes(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = 1;
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/setRandom.ts":
+/*!*****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/setRandom.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setRandom: () => (/* binding */ setRandom)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var setRandom = function setRandom(m1, parameter) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = (Math.random() * 4 - 2) * Math.sqrt(2 / parameter); // todo: gaussian distribution;
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/setZeros.ts":
+/*!****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/setZeros.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setZeros: () => (/* binding */ setZeros)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var setZeros = function setZeros(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = 0;
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/sqrt.ts":
+/*!************************************************!*\
+  !*** ./src/typescript/Computation/CPU/sqrt.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   sqrt: () => (/* binding */ sqrt)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var sqrt = function sqrt(m1) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = Math.sqrt(m1.data[row][col] + 1e-8);
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/subtract.ts":
+/*!****************************************************!*\
+  !*** ./src/typescript/Computation/CPU/subtract.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   subtract: () => (/* binding */ subtract)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var subtract = function subtract(m1, m) {
+  if (typeof m === "number") {
+    var data = [];
+    for (var row = 0; row < m1.rows; row += 1) {
+      data[row] = [];
+      for (var col = 0; col < m1.cols; col += 1) {
+        data[row][col] = m1.data[row][col] - m;
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  } else {
+    if (m1.rows !== m.rows || m1.cols !== m.cols) {
+      throw new Error("Dimensions error: ".concat(m1.rows, ", ").concat(m1.cols, " !== ").concat(m.rows, ", ").concat(m.cols));
+    }
+    var _data = [];
+    for (var _row = 0; _row < m1.rows; _row += 1) {
+      _data[_row] = [];
+      for (var _col = 0; _col < m1.cols; _col += 1) {
+        _data[_row][_col] = m1.data[_row][_col] - m.data[_row][_col];
+      }
+    }
+    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+  }
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/subtractNumberFrom.ts":
+/*!**************************************************************!*\
+  !*** ./src/typescript/Computation/CPU/subtractNumberFrom.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   subtractNumberFrom: () => (/* binding */ subtractNumberFrom)
+/* harmony export */ });
+/* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+
+var subtractNumberFrom = function subtractNumberFrom(m1, num) {
+  var data = [];
+  for (var row = 0; row < m1.rows; row += 1) {
+    data[row] = [];
+    for (var col = 0; col < m1.cols; col += 1) {
+      data[row][col] = num - m1.data[row][col];
+    }
+  }
+  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+};
+
+/***/ }),
+
+/***/ "./src/typescript/Computation/CPU/sum.ts":
+/*!***********************************************!*\
+  !*** ./src/typescript/Computation/CPU/sum.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   sum: () => (/* binding */ sum)
+/* harmony export */ });
+var sum = function sum(m1) {
+  var sum = 0.0;
+  for (var row = 0; row < m1.rows; row += 1) {
+    for (var col = 0; col < m1.cols; col += 1) {
+      sum += m1.data[row][col];
+    }
+  }
+  return sum;
 };
 
 /***/ }),
@@ -143,6 +898,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CPU_dot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CPU/dot */ "./src/typescript/Computation/CPU/dot.ts");
 /* harmony import */ var _CPU_transpose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CPU/transpose */ "./src/typescript/Computation/CPU/transpose.ts");
 /* harmony import */ var _CPU_reluBackpropagation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CPU/reluBackpropagation */ "./src/typescript/Computation/CPU/reluBackpropagation.ts");
+/* harmony import */ var _CPU_add__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CPU/add */ "./src/typescript/Computation/CPU/add.ts");
+/* harmony import */ var _CPU_subtract__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CPU/subtract */ "./src/typescript/Computation/CPU/subtract.ts");
+/* harmony import */ var _CPU_multiply__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CPU/multiply */ "./src/typescript/Computation/CPU/multiply.ts");
+/* harmony import */ var _CPU_divide__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CPU/divide */ "./src/typescript/Computation/CPU/divide.ts");
+/* harmony import */ var _CPU_minusOne__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./CPU/minusOne */ "./src/typescript/Computation/CPU/minusOne.ts");
+/* harmony import */ var _CPU_log__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CPU/log */ "./src/typescript/Computation/CPU/log.ts");
+/* harmony import */ var _CPU_pow__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./CPU/pow */ "./src/typescript/Computation/CPU/pow.ts");
+/* harmony import */ var _CPU_exp__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CPU/exp */ "./src/typescript/Computation/CPU/exp.ts");
+/* harmony import */ var _CPU_sqrt__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./CPU/sqrt */ "./src/typescript/Computation/CPU/sqrt.ts");
+/* harmony import */ var _CPU_subtractNumberFrom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./CPU/subtractNumberFrom */ "./src/typescript/Computation/CPU/subtractNumberFrom.ts");
+/* harmony import */ var _CPU_setMin__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./CPU/setMin */ "./src/typescript/Computation/CPU/setMin.ts");
+/* harmony import */ var _CPU_setMax__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./CPU/setMax */ "./src/typescript/Computation/CPU/setMax.ts");
+/* harmony import */ var _CPU_setOnes__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./CPU/setOnes */ "./src/typescript/Computation/CPU/setOnes.ts");
+/* harmony import */ var _CPU_setZeros__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./CPU/setZeros */ "./src/typescript/Computation/CPU/setZeros.ts");
+/* harmony import */ var _CPU_setRandom__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./CPU/setRandom */ "./src/typescript/Computation/CPU/setRandom.ts");
+/* harmony import */ var _CPU_fraction__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./CPU/fraction */ "./src/typescript/Computation/CPU/fraction.ts");
+/* harmony import */ var _CPU_max__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./CPU/max */ "./src/typescript/Computation/CPU/max.ts");
+/* harmony import */ var _CPU_abs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./CPU/abs */ "./src/typescript/Computation/CPU/abs.ts");
+/* harmony import */ var _CPU_mean__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./CPU/mean */ "./src/typescript/Computation/CPU/mean.ts");
+/* harmony import */ var _CPU_sum__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./CPU/sum */ "./src/typescript/Computation/CPU/sum.ts");
+/* harmony import */ var _CPU_rowwiseSum__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./CPU/rowwiseSum */ "./src/typescript/Computation/CPU/rowwiseSum.ts");
+/* harmony import */ var _CPU_colwiseSum__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./CPU/colwiseSum */ "./src/typescript/Computation/CPU/colwiseSum.ts");
+/* harmony import */ var _CPU_replicate__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./CPU/replicate */ "./src/typescript/Computation/CPU/replicate.ts");
+/* harmony import */ var _CPU_colMaxCoeffIndex__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./CPU/colMaxCoeffIndex */ "./src/typescript/Computation/CPU/colMaxCoeffIndex.ts");
+/* harmony import */ var _CPU_rowMaxCoeffIndex__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./CPU/rowMaxCoeffIndex */ "./src/typescript/Computation/CPU/rowMaxCoeffIndex.ts");
+/* harmony import */ var _CPU_row__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./CPU/row */ "./src/typescript/Computation/CPU/row.ts");
+/* harmony import */ var _CPU_col__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./CPU/col */ "./src/typescript/Computation/CPU/col.ts");
+/* harmony import */ var _CPU_rollToColMatrix__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./CPU/rollToColMatrix */ "./src/typescript/Computation/CPU/rollToColMatrix.ts");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -160,6 +943,34 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Objec
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
   function ComputationCPU() {
     var _this;
@@ -168,13 +979,39 @@ var ComputationCPU = /*#__PURE__*/function (_AbstractComputation) {
     _this.addKernel("dot", _CPU_dot__WEBPACK_IMPORTED_MODULE_1__.dot);
     _this.addKernel("transpose", _CPU_transpose__WEBPACK_IMPORTED_MODULE_2__.transpose);
     _this.addKernel("reluBackpropagation", _CPU_reluBackpropagation__WEBPACK_IMPORTED_MODULE_3__.reluBackpropagation);
-    /*this.addKernel("add", add);
-    this.addKernel("subtract", subtract);
+    _this.addKernel("add", _CPU_add__WEBPACK_IMPORTED_MODULE_4__.add);
+    _this.addKernel("subtract", _CPU_subtract__WEBPACK_IMPORTED_MODULE_5__.subtract);
+    _this.addKernel("multiply", _CPU_multiply__WEBPACK_IMPORTED_MODULE_6__.multiply);
+    _this.addKernel("divide", _CPU_divide__WEBPACK_IMPORTED_MODULE_7__.divide);
+    _this.addKernel("minusOne", _CPU_minusOne__WEBPACK_IMPORTED_MODULE_8__.minusOne);
+    _this.addKernel("subtractNumberFrom", _CPU_subtractNumberFrom__WEBPACK_IMPORTED_MODULE_13__.subtractNumberFrom);
+    _this.addKernel("log", _CPU_log__WEBPACK_IMPORTED_MODULE_9__.log);
+    _this.addKernel("exp", _CPU_exp__WEBPACK_IMPORTED_MODULE_11__.exp);
+    _this.addKernel("pow", _CPU_pow__WEBPACK_IMPORTED_MODULE_10__.pow);
+    _this.addKernel("sqrt", _CPU_sqrt__WEBPACK_IMPORTED_MODULE_12__.sqrt);
+    _this.addKernel("setMin", _CPU_setMin__WEBPACK_IMPORTED_MODULE_14__.setMin);
+    _this.addKernel("setMax", _CPU_setMax__WEBPACK_IMPORTED_MODULE_15__.setMax);
+    _this.addKernel("setOnes", _CPU_setOnes__WEBPACK_IMPORTED_MODULE_16__.setOnes);
+    _this.addKernel("setZeros", _CPU_setZeros__WEBPACK_IMPORTED_MODULE_17__.setZeros);
+    _this.addKernel("setRandom", _CPU_setRandom__WEBPACK_IMPORTED_MODULE_18__.setRandom);
+    _this.addKernel("fraction", _CPU_fraction__WEBPACK_IMPORTED_MODULE_19__.fraction);
+    _this.addKernel("max", _CPU_max__WEBPACK_IMPORTED_MODULE_20__.max);
+    _this.addKernel("abs", _CPU_abs__WEBPACK_IMPORTED_MODULE_21__.abs);
+    _this.addKernel("mean", _CPU_mean__WEBPACK_IMPORTED_MODULE_22__.mean);
+    _this.addKernel("sum", _CPU_sum__WEBPACK_IMPORTED_MODULE_23__.sum);
+    _this.addKernel("rowwiseSum", _CPU_rowwiseSum__WEBPACK_IMPORTED_MODULE_24__.rowwiseSum);
+    _this.addKernel("colwiseSum", _CPU_colwiseSum__WEBPACK_IMPORTED_MODULE_25__.colwiseSum);
+    _this.addKernel("replicate", _CPU_replicate__WEBPACK_IMPORTED_MODULE_26__.replicate);
+    _this.addKernel("colMaxCoeffIndex", _CPU_colMaxCoeffIndex__WEBPACK_IMPORTED_MODULE_27__.colMaxCoeffIndex);
+    _this.addKernel("rowMaxCoeffIndex", _CPU_rowMaxCoeffIndex__WEBPACK_IMPORTED_MODULE_28__.rowMaxCoeffIndex);
+    _this.addKernel("row", _CPU_row__WEBPACK_IMPORTED_MODULE_29__.row);
+    _this.addKernel("col", _CPU_col__WEBPACK_IMPORTED_MODULE_30__.col);
+    _this.addKernel("rollToColMatrix", _CPU_rollToColMatrix__WEBPACK_IMPORTED_MODULE_31__.rollToColMatrix);
+    /*
     this.addKernel("subtractFromNumber", subtractFromNumber);
     this.addKernel("fillRandom", fillRandom);
     this.addKernel("fillZeros", fillZeros);
     this.addKernel("elementWiseMultiply", elementWiseMultiply);
-    this.addKernel("multiplyNumber", multiplyNumber);
     this.addKernel("elementWiseDivide", elementWiseDivide);
     this.addKernel("divideNumber", divideNumber);
     this.addKernel("logisticActivation", logisticActivation);
@@ -379,18 +1216,18 @@ var Matrix = /*#__PURE__*/function () {
         data[row] = new Array(this.cols);
       }
       for (var col = 0; col < this.cols; col += 1) {
-        for (var _row3 = 0; _row3 < this.rows; _row3 += 1) {
-          if (typeof arr[_row3] === "number") {
-            data[_row3][col] = arr[_row3];
+        for (var _row2 = 0; _row2 < this.rows; _row2 += 1) {
+          if (typeof arr[_row2] === "number") {
+            data[_row2][col] = arr[_row2];
           } else {
-            if (typeof arr[_row3][col] === "string") {
-              if (/^[0-9.]+$/.test(String(arr[_row3][col]))) {
-                data[_row3][col] = Number(arr[_row3][col]);
+            if (typeof arr[_row2][col] === "string") {
+              if (/^[0-9.]+$/.test(String(arr[_row2][col]))) {
+                data[_row2][col] = Number(arr[_row2][col]);
               } else {
-                data[_row3][col] = arr[_row3][col];
+                data[_row2][col] = arr[_row2][col];
               }
             } else {
-              data[_row3][col] = arr[_row3][col];
+              data[_row2][col] = arr[_row2][col];
             }
           }
         }
@@ -401,39 +1238,17 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "sum",
     value: function sum() {
-      var sum = 0.0;
-      for (var row = 0; row < this.rows; row += 1) {
-        for (var col = 0; col < this.cols; col += 1) {
-          sum += this.data[row][col];
-        }
-      }
-      return sum;
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("sum", this);
     }
   }, {
     key: "colwiseSum",
     value: function colwiseSum() {
-      var data = [];
-      var t = this.transpose();
-      for (var row = 0; row < t.rows; row += 1) {
-        data[row] = [0];
-        for (var col = 0; col < t.cols; col += 1) {
-          data[row][0] += t.data[row][col];
-        }
-      }
-      return new Matrix(this.cols, 1, data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("colwiseSum", this);
     }
   }, {
     key: "rowwiseSum",
     value: function rowwiseSum() {
-      var data = [[]];
-      for (var row = 0; row < this.rows; row += 1) {
-        var sum = 0.0;
-        for (var col = 0; col < this.cols; col += 1) {
-          sum += this.data[row][col];
-        }
-        data[0].push(sum);
-      }
-      return new Matrix(1, this.rows, data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("rowwiseSum", this);
     }
   }, {
     key: "flatten",
@@ -449,26 +1264,7 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "replicate",
     value: function replicate(rows, cols) {
-      if (rows === 1 && this.cols === 1 && cols > 1) {
-        var newData = [];
-        for (var row = 0; row < this.rows; row += 1) {
-          newData[row] = [];
-          for (var col = 0; col < cols; col += 1) {
-            newData[row][col] = this.data[row][0];
-          }
-        }
-        return Matrix.from(newData);
-      } else if (cols === 1 && this.rows === 1 && rows > 1) {
-        var _newData = [];
-        for (var _row4 = 0; _row4 < rows; _row4 += 1) {
-          _newData[_row4] = [];
-          for (var _col2 = 0; _col2 < this.cols; _col2 += 1) {
-            _newData[_row4][_col2] = this.data[0][_col2];
-          }
-        }
-        return Matrix.from(_newData);
-      }
-      return this;
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("replicate", this, rows, cols);
     }
   }, {
     key: "transpose",
@@ -478,68 +1274,32 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "colMaxCoeffIndex",
     value: function colMaxCoeffIndex(col) {
-      var maxIndex = -1;
-      var max = -Infinity;
-      for (var row = 0; row < this.rows; row += 1) {
-        if (this.data && this.data[row][col] > max) {
-          max = this.data[row][col];
-          maxIndex = row;
-        }
-      }
-      return maxIndex;
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("colMaxCoeffIndex", this, col);
     }
   }, {
     key: "rowMaxCoeffIndex",
     value: function rowMaxCoeffIndex(row) {
-      var maxIndex = -1;
-      var max = -Infinity;
-      for (var col = 0; col < this.cols; col += 1) {
-        if (this.data[row][col] > max) {
-          max = this.data[row][col];
-          maxIndex = col;
-        }
-      }
-      return maxIndex;
-    }
-  }, {
-    key: "block",
-    value: function block(startRow, startCol, blockRows, blockCols) {
-      var data = [];
-      for (var row = startRow, newRow = 0; row < this.rows && row < startRow + blockRows; row += 1, newRow += 1) {
-        data[newRow] = new Array(blockCols);
-        for (var col = startCol, newCol = 0; col < this.cols && col < startCol + blockCols; col += 1, newCol += 1) {
-          data[newRow][newCol] = this.data[row][col];
-        }
-      }
-      return new Matrix(blockRows, blockCols, data);
-    }
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("rowMaxCoeffIndex", this, row);
+    } /*
+      block(startRow: number, startCol: number, blockRows: number, blockCols: number): Matrix {
+       const data = [];
+        for (let row = startRow, newRow = 0; row < this.rows && row < startRow + blockRows; row += 1, newRow += 1) {
+         data[newRow] = new Array(blockCols);
+         for (let col = startCol, newCol = 0; col < this.cols && col < startCol + blockCols; col += 1, newCol += 1) {
+           data[newRow][newCol] = this.data[row][col];
+         }
+       }
+        return new Matrix(blockRows, blockCols, data);
+      }*/
   }, {
     key: "col",
     value: function col(_col) {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [this.data[row][_col]];
-      }
-      return new Matrix(this.rows, 1, data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("col", this, _col);
     }
   }, {
     key: "row",
-    value: function row(_row2) {
-      var data = [];
-      for (var col = 0; col < this.cols; col += 1) {
-        data[col] = [this.data[_row2][col]];
-      }
-      return new Matrix(this.cols, 1, data);
-    }
-  }, {
-    key: "setCol",
-    value: function setCol(col, tmp) {
-      for (var row = 0; row < this.rows; row += 1) {
-        if (this.data && tmp.data) {
-          this.data[row][col] = tmp.data[row][0];
-        }
-      }
-      return this;
+    value: function row(_row) {
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("row", this, _row);
     }
   }, {
     key: "sigmoid",
@@ -549,136 +1309,60 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "rollToColMatrix",
     value: function rollToColMatrix() {
-      var data = [];
-      var _row = 0;
-      for (var row = 0; row < this.rows; row += 1) {
-        for (var col = 0; col < this.cols; col += 1) {
-          data[_row] = [];
-          data[_row++][0] = this.data[row][col];
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("rollToColMatrix", this);
     }
   }, {
     key: "abs",
     value: function abs() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.abs(this.data[row][col]);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("abs", this);
     }
   }, {
     key: "mean",
     value: function mean() {
-      var sum = 0;
-      var numberOfElements = this.rows * this.cols;
-      for (var row = 0; row < this.rows; row += 1) {
-        for (var col = 0; col < this.cols; col += 1) {
-          sum += this.data[row][col];
-        }
-      }
-      return sum / numberOfElements;
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("mean", this);
     }
   }, {
     key: "max",
     value: function max() {
-      var max = -Infinity;
-      for (var row = 0; row < this.rows; row += 1) {
-        for (var col = 0; col < this.cols; col += 1) {
-          max = Math.max(this.data[row][col], max);
-        }
-      }
-      return max;
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("max", this);
     }
   }, {
     key: "setMax",
     value: function setMax(max) {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.min(this.data[row][col], max);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("setMax", this, max);
     }
   }, {
     key: "setMin",
     value: function setMin(min) {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.max(this.data[row][col], min);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("setMin", this, min);
     }
   }, {
     key: "setZeros",
     value: function setZeros() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = 0;
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("setZeros", this);
     }
   }, {
     key: "setOnes",
     value: function setOnes() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = 1;
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("setOnes", this);
     }
   }, {
     key: "setRandom",
     value: function setRandom() {
       var parameter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = (Math.random() * 4 - 2) * Math.sqrt(2 / parameter); // todo: gaussian distribution;
-        }
-      }
-      return Matrix.from(data);
+      // todo: gaussian distribution
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("setRandom", this, parameter);
     }
   }, {
     key: "fraction",
     value: function fraction() {
       var num = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = num / this.data[row][col];
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("fraction", this, num);
     }
   }, {
     key: "sqrt",
     value: function sqrt() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.sqrt(this.data[row][col] + 1e-8);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("sqrt", this);
     }
   }, {
     key: "dot",
@@ -688,56 +1372,12 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "multiply",
     value: function multiply(num) {
-      if (typeof num === "number") {
-        var data = [];
-        for (var row = 0; row < this.rows; row += 1) {
-          data[row] = [];
-          for (var col = 0; col < this.cols; col += 1) {
-            // @ts-ignore
-            data[row][col] = this.data[row][col] * num;
-          }
-        }
-        return Matrix.from(data);
-      } else {
-        if (num.rows !== this.rows || this.cols !== num.cols) {
-          throw new Error("Dimension error: ".concat(this.shape(), " !== ").concat(num.shape()));
-        }
-        var _data = [];
-        for (var _row5 = 0; _row5 < this.rows; _row5 += 1) {
-          _data[_row5] = [];
-          for (var _col3 = 0; _col3 < this.cols; _col3 += 1) {
-            // @ts-ignore
-            _data[_row5][_col3] = this.data[_row5][_col3] * num.data[_row5][_col3];
-          }
-        }
-        return Matrix.from(_data);
-      }
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("multiply", this, num);
     }
   }, {
     key: "subtract",
     value: function subtract(m) {
-      if (typeof m === "number") {
-        var data = [];
-        for (var row = 0; row < this.rows; row += 1) {
-          data[row] = [];
-          for (var col = 0; col < this.cols; col += 1) {
-            data[row][col] = this.data[row][col] - m;
-          }
-        }
-        return Matrix.from(data);
-      } else {
-        if (this.rows !== m.rows || this.cols !== m.cols) {
-          throw new Error("Dimensions error: ".concat(this.rows, ", ").concat(this.cols, " !== ").concat(m.rows, ", ").concat(m.cols));
-        }
-        var _data2 = [];
-        for (var _row6 = 0; _row6 < this.rows; _row6 += 1) {
-          _data2[_row6] = [];
-          for (var _col4 = 0; _col4 < this.cols; _col4 += 1) {
-            _data2[_row6][_col4] = this.data[_row6][_col4] - m.data[_row6][_col4];
-          }
-        }
-        return Matrix.from(_data2);
-      }
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("subtract", this, m);
     }
   }, {
     key: "forEach",
@@ -759,91 +1399,27 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "divide",
     value: function divide(num) {
-      if (typeof num === "number") {
-        var data = [];
-        for (var row = 0; row < this.rows; row += 1) {
-          data[row] = [];
-          for (var col = 0; col < this.cols; col += 1) {
-            data[row][col] = this.data[row][col] / num;
-          }
-        }
-        return Matrix.from(data);
-      } else {
-        if (num.rows !== this.rows || num.cols !== this.cols) {
-          throw new Error("Dimensions error (".concat(this.rows, ", ").concat(this.cols, ") !== (").concat(num.rows, ", ").concat(num.cols, ")"));
-        }
-        var _data3 = [];
-        for (var _row7 = 0; _row7 < this.rows; _row7 += 1) {
-          _data3[_row7] = [];
-          for (var _col5 = 0; _col5 < this.cols; _col5 += 1) {
-            _data3[_row7][_col5] = this.data[_row7][_col5] / num.data[_row7][_col5];
-          }
-        }
-        return Matrix.from(_data3);
-      }
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("divide", this, num);
     }
   }, {
     key: "minusOne",
     value: function minusOne() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = 1 - this.data[row][col];
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("subtractNumberFrom", this, -1);
     }
   }, {
-    key: "subtractFromNumber",
-    value: function subtractFromNumber(num) {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = num - this.data[row][col];
-        }
-      }
-      return Matrix.from(data);
+    key: "subtractNumberFrom",
+    value: function subtractNumberFrom(num) {
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("subtractNumberFrom", this, num);
     }
   }, {
     key: "add",
     value: function add(m) {
-      if (typeof m === "number") {
-        var data = [];
-        for (var row = 0; row < this.rows; row += 1) {
-          data[row] = [];
-          for (var col = 0; col < this.cols; col += 1) {
-            data[row][col] = this.data[row][col] + m;
-          }
-        }
-        return Matrix.from(data);
-      } else if (m instanceof Matrix) {
-        if (m.rows !== this.rows || m.cols !== this.cols) {
-          throw new Error("Dimention error: rows (x: ".concat(this.rows, ", y: ").concat(this.cols, ") !== (x: ").concat(m.rows, ", y: ").concat(m.cols, ")"));
-        }
-        var _data4 = [];
-        for (var _row8 = 0; _row8 < this.rows; _row8 += 1) {
-          _data4[_row8] = [];
-          for (var _col6 = 0; _col6 < this.cols; _col6 += 1) {
-            _data4[_row8][_col6] = this.data[_row8][_col6] + m.data[_row8][_col6];
-          }
-        }
-        return Matrix.from(_data4);
-      }
-      return this;
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("add", this, m);
     }
   }, {
     key: "log",
     value: function log() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.log(this.data[row][col] + 1e-8);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("log", this);
     }
   }, {
     key: "tanh",
@@ -859,26 +1435,12 @@ var Matrix = /*#__PURE__*/function () {
   }, {
     key: "exp",
     value: function exp() {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.exp(this.data[row][col] + 1e-8);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("exp", this);
     }
   }, {
     key: "pow",
     value: function pow(num) {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (var col = 0; col < this.cols; col += 1) {
-          data[row][col] = Math.pow(this.data[row][col], num);
-        }
-      }
-      return Matrix.from(data);
+      return (0,_Computation__WEBPACK_IMPORTED_MODULE_0__.getComputation)().execute("pow", this, num);
     }
   }, {
     key: "value",

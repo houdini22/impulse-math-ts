@@ -1,4 +1,5 @@
 import { getComputation } from "../Computation";
+import { minusOne } from "../Computation/CPU/minusOne";
 
 export class Matrix {
   public rows = 0;
@@ -50,37 +51,15 @@ export class Matrix {
   }
 
   sum(): number {
-    let sum = 0.0;
-    for (let row = 0; row < this.rows; row += 1) {
-      for (let col = 0; col < this.cols; col += 1) {
-        sum += this.data[row][col];
-      }
-    }
-    return sum;
+    return getComputation().execute("sum", this) as number;
   }
 
   colwiseSum(): Matrix {
-    const data = [];
-    const t = this.transpose();
-    for (let row = 0; row < t.rows; row += 1) {
-      data[row] = [0];
-      for (let col = 0; col < t.cols; col += 1) {
-        data[row][0] += t.data[row][col];
-      }
-    }
-    return new Matrix(this.cols, 1, data);
+    return getComputation().execute("colwiseSum", this) as Matrix;
   }
 
   rowwiseSum(): Matrix {
-    const data = [[]];
-    for (let row = 0; row < this.rows; row += 1) {
-      let sum = 0.0;
-      for (let col = 0; col < this.cols; col += 1) {
-        sum += this.data[row][col];
-      }
-      data[0].push(sum);
-    }
-    return new Matrix(1, this.rows, data);
+    return getComputation().execute("rowwiseSum", this) as Matrix;
   }
 
   flatten(): number[] {
@@ -94,26 +73,7 @@ export class Matrix {
   }
 
   replicate(rows: number, cols: number): Matrix {
-    if (rows === 1 && this.cols === 1 && cols > 1) {
-      const newData = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        newData[row] = [];
-        for (let col = 0; col < cols; col += 1) {
-          newData[row][col] = this.data[row][0];
-        }
-      }
-      return Matrix.from(newData);
-    } else if (cols === 1 && this.rows === 1 && rows > 1) {
-      const newData = [];
-      for (let row = 0; row < rows; row += 1) {
-        newData[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          newData[row][col] = this.data[0][col];
-        }
-      }
-      return Matrix.from(newData);
-    }
-    return this;
+    return getComputation().execute("replicate", this, rows, cols) as Matrix;
   }
 
   transpose(): Matrix {
@@ -121,32 +81,12 @@ export class Matrix {
   }
 
   colMaxCoeffIndex(col: number): number {
-    let maxIndex = -1;
-    let max = -Infinity;
-
-    for (let row = 0; row < this.rows; row += 1) {
-      if (this.data && this.data[row][col] > max) {
-        max = this.data[row][col];
-        maxIndex = row;
-      }
-    }
-
-    return maxIndex;
+    return getComputation().execute("colMaxCoeffIndex", this, col) as number;
   }
 
   rowMaxCoeffIndex(row: number): number {
-    let maxIndex = -1;
-    let max = -Infinity;
-
-    for (let col = 0; col < this.cols; col += 1) {
-      if (this.data[row][col] > max) {
-        max = this.data[row][col];
-        maxIndex = col;
-      }
-    }
-
-    return maxIndex;
-  }
+    return getComputation().execute("rowMaxCoeffIndex", this, row) as number;
+  }/*
 
   block(startRow: number, startCol: number, blockRows: number, blockCols: number): Matrix {
     const data = [];
@@ -159,158 +99,62 @@ export class Matrix {
     }
 
     return new Matrix(blockRows, blockCols, data);
-  }
+  }*/
 
   col(col: number): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [this.data[row][col]];
-    }
-    return new Matrix(this.rows, 1, data);
+    return getComputation().execute("col", this, col) as Matrix;
   }
 
   row(row: number): Matrix {
-    const data = [];
-    for (let col = 0; col < this.cols; col += 1) {
-      data[col] = [this.data[row][col]];
-    }
-    return new Matrix(this.cols, 1, data);
+    return getComputation().execute("row", this, row) as Matrix;
   }
-
-  setCol(col: number, tmp: Matrix): Matrix {
-    for (let row = 0; row < this.rows; row += 1) {
-      if (this.data && tmp.data) {
-        this.data[row][col] = tmp.data[row][0];
-      }
-    }
-    return this;
-  }
-
   sigmoid() {
     return this.multiply(-1).exp().add(1).fraction(1);
   }
 
   rollToColMatrix(): Matrix {
-    const data = [];
-    let _row = 0;
-    for (let row = 0; row < this.rows; row += 1) {
-      for (let col = 0; col < this.cols; col += 1) {
-        data[_row] = [];
-        data[_row++][0] = this.data[row][col];
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("rollToColMatrix", this) as Matrix;
   }
 
   abs(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.abs(this.data[row][col]);
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("abs", this) as Matrix;
   }
 
   mean() {
-    let sum = 0;
-    const numberOfElements = this.rows * this.cols;
-
-    for (let row = 0; row < this.rows; row += 1) {
-      for (let col = 0; col < this.cols; col += 1) {
-        sum += this.data[row][col];
-      }
-    }
-
-    return sum / numberOfElements;
+    return getComputation().execute("mean", this) as number;
   }
 
   max(): number {
-    let max = -Infinity;
-    for (let row = 0; row < this.rows; row += 1) {
-      for (let col = 0; col < this.cols; col += 1) {
-        max = Math.max(this.data[row][col], max);
-      }
-    }
-    return max;
+    return getComputation().execute("max", this) as number;
   }
 
   setMax(max: number): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.min(this.data[row][col], max);
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("setMax", this, max) as Matrix;
   }
 
   setMin(min: number): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.max(this.data[row][col], min);
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("setMin", this, min) as Matrix;
   }
 
   setZeros(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = 0;
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("setZeros", this) as Matrix;
   }
 
   setOnes(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = 1;
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("setOnes", this) as Matrix;
   }
 
-  setRandom(parameter: number = 1): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = (Math.random() * 4 - 2) * Math.sqrt(2 / parameter); // todo: gaussian distribution;
-      }
-    }
-    return Matrix.from(data);
+  setRandom(parameter = 1): Matrix {
+    // todo: gaussian distribution
+    return getComputation().execute("setRandom", this, parameter) as Matrix;
   }
 
-  fraction(num: number = 1): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = num / this.data[row][col];
-      }
-    }
-    return Matrix.from(data);
+  fraction(num = 1): Matrix {
+    return getComputation().execute("fraction", this, num) as Matrix;
   }
 
   sqrt(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.sqrt(this.data[row][col] + 1e-8);
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("sqrt", this) as Matrix;
   }
 
   dot(m: Matrix): Matrix {
@@ -318,55 +162,11 @@ export class Matrix {
   }
 
   multiply(num: number | Matrix): Matrix {
-    if (typeof num === "number") {
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          // @ts-ignore
-          data[row][col] = this.data[row][col] * num;
-        }
-      }
-      return Matrix.from(data);
-    } else {
-      if (num.rows !== this.rows || this.cols !== num.cols) {
-        throw new Error(`Dimension error: ${this.shape()} !== ${num.shape()}`);
-      }
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          // @ts-ignore
-          data[row][col] = this.data[row][col] * num.data[row][col];
-        }
-      }
-      return Matrix.from(data);
-    }
+    return getComputation().execute("multiply", this, num) as Matrix;
   }
 
   subtract(m: Matrix | number): Matrix {
-    if (typeof m === "number") {
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] - m;
-        }
-      }
-      return Matrix.from(data);
-    } else {
-      if (this.rows !== m.rows || this.cols !== m.cols) {
-        throw new Error(`Dimensions error: ${this.rows}, ${this.cols} !== ${m.rows}, ${m.cols}`);
-      }
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] - m.data[row][col];
-        }
-      }
-      return Matrix.from(data);
-    }
+    return getComputation().execute("subtract", this, m) as Matrix;
   }
 
   forEach(cb: (num: number) => number): Matrix {
@@ -385,87 +185,23 @@ export class Matrix {
   }
 
   divide(num: number | Matrix): Matrix {
-    if (typeof num === "number") {
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] / num;
-        }
-      }
-      return Matrix.from(data);
-    } else {
-      if (num.rows !== this.rows || num.cols !== this.cols) {
-        throw new Error(`Dimensions error (${this.rows}, ${this.cols}) !== (${num.rows}, ${num.cols})`);
-      }
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] / num.data[row][col];
-        }
-      }
-      return Matrix.from(data);
-    }
+    return getComputation().execute("divide", this, num) as Matrix;
   }
 
   minusOne(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = 1 - this.data[row][col];
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("subtractNumberFrom", this, -1) as Matrix;
   }
 
-  subtractFromNumber(num: number): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = num - this.data[row][col];
-      }
-    }
-    return Matrix.from(data);
+  subtractNumberFrom(num: number): Matrix {
+    return getComputation().execute("subtractNumberFrom", this, num) as Matrix;
   }
 
   add(m: Matrix | number): Matrix {
-    if (typeof m === "number") {
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] + m;
-        }
-      }
-      return Matrix.from(data);
-    } else if (m instanceof Matrix) {
-      if (m.rows !== this.rows || m.cols !== this.cols) {
-        throw new Error(`Dimention error: rows (x: ${this.rows}, y: ${this.cols}) !== (x: ${m.rows}, y: ${m.cols})`);
-      }
-      const data = [];
-      for (let row = 0; row < this.rows; row += 1) {
-        data[row] = [];
-        for (let col = 0; col < this.cols; col += 1) {
-          data[row][col] = this.data[row][col] + m.data[row][col];
-        }
-      }
-      return Matrix.from(data);
-    }
-    return this;
+    return getComputation().execute("add", this, m) as Matrix;
   }
 
   log(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.log(this.data[row][col] + 1e-8);
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("log", this) as Matrix;
   }
 
   tanh(): Matrix {
@@ -480,25 +216,11 @@ export class Matrix {
   }
 
   exp(): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.exp(this.data[row][col] + 1e-8);
-      }
-    }
-    return Matrix.from(data);
+    return getComputation().execute("exp", this) as Matrix;
   }
 
-  pow(num): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = [];
-      for (let col = 0; col < this.cols; col += 1) {
-        data[row][col] = Math.pow(this.data[row][col], num);
-      }
-    }
-    return Matrix.from(data);
+  pow(num: number): Matrix {
+    return getComputation().execute("pow", this, num) as Matrix;
   }
 
   value(row, col, value = undefined) {
