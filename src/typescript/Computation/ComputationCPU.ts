@@ -1,7 +1,7 @@
 import { AbstractComputation } from "./AbstractComputation";
-import { Matrix } from "../Math/Matrix";
 import { dot } from "./CPU/dot";
-import {transpose} from "./CPU/transpose";
+import { transpose } from "./CPU/transpose";
+import { reluBackpropagation } from "./CPU/reluBackpropagation";
 
 export class ComputationCPU extends AbstractComputation {
   constructor() {
@@ -9,6 +9,7 @@ export class ComputationCPU extends AbstractComputation {
 
     this.addKernel("dot", dot);
     this.addKernel("transpose", transpose);
+    this.addKernel("reluBackpropagation", reluBackpropagation);
     /*this.addKernel("add", add);
     this.addKernel("subtract", subtract);
     this.addKernel("subtractFromNumber", subtractFromNumber);
@@ -23,7 +24,6 @@ export class ComputationCPU extends AbstractComputation {
     this.addKernel("logisticBackpropagation", logisticBackpropagation);
     this.addKernel("tanhActivation", tanhActivation);
     this.addKernel("reluActivation", reluActivation);
-    this.addKernel("reluBackpropagation", reluBackpropagation);
     this.addKernel("softplusActivation", softplusActivation);
     this.addKernel("penalty", penalty);
     this.addKernel("sqrt", sqrt);
