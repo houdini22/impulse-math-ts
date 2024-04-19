@@ -57,16 +57,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   abs: () => (/* binding */ abs)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var abs = function abs(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.abs(m1.data[row][col]);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.abs(value);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -82,29 +85,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   add: () => (/* binding */ add)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var add = function add(m1, m) {
   if (typeof m === "number") {
-    var data = [];
-    for (var row = 0; row < m1.rows; row += 1) {
-      data[row] = [];
-      for (var col = 0; col < m1.cols; col += 1) {
-        data[row][col] = m1.data[row][col] + m;
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+    var data = _toConsumableArray(m1.data);
+    data.forEach(function (value, index) {
+      data[index] = value + m;
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
   } else if (m instanceof _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix) {
     if (m.rows !== m1.rows || m.cols !== m1.cols) {
       throw new Error("Dimention error: rows (x: ".concat(m1.rows, ", y: ").concat(m1.cols, ") !== (x: ").concat(m.rows, ", y: ").concat(m.cols, ")"));
     }
-    var _data = [];
-    for (var _row = 0; _row < m1.rows; _row += 1) {
-      _data[_row] = [];
-      for (var _col = 0; _col < m1.cols; _col += 1) {
-        _data[_row][_col] = m1.data[_row][_col] + m.data[_row][_col];
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+    var _data = _toConsumableArray(m1.data);
+    _data.forEach(function (value, index) {
+      _data[index] = value + m.data[index];
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, _data);
   }
 };
 
@@ -125,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 var col = function col(m1, _col) {
   var data = [];
   for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [m1.data[row][_col]];
+    data[row] = m1.data[m1.cols * row + _col];
   }
   return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, 1, data);
 };
@@ -146,8 +149,8 @@ var colMaxCoeffIndex = function colMaxCoeffIndex(m1, col) {
   var maxIndex = -1;
   var max = -Infinity;
   for (var row = 0; row < m1.rows; row += 1) {
-    if (m1.data && m1.data[row][col] > max) {
-      max = m1.data[row][col];
+    if (m1.data[row * m1.cols + col] > max) {
+      max = m1.data[row * m1.cols + col];
       maxIndex = row;
     }
   }
@@ -172,9 +175,9 @@ var colwiseSum = function colwiseSum(m1) {
   var data = [];
   var t = m1.transpose();
   for (var row = 0; row < t.rows; row += 1) {
-    data[row] = [0];
+    data[row] = 0;
     for (var col = 0; col < t.cols; col += 1) {
-      data[row][0] += t.data[row][col];
+      data[row] += t.data[row * t.cols + col];
     }
   }
   return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.cols, 1, data);
@@ -193,29 +196,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   divide: () => (/* binding */ divide)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var divide = function divide(m1, num) {
   if (typeof num === "number") {
-    var data = [];
-    for (var row = 0; row < m1.rows; row += 1) {
-      data[row] = [];
-      for (var col = 0; col < m1.cols; col += 1) {
-        data[row][col] = m1.data[row][col] / num;
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+    var data = _toConsumableArray(m1.data);
+    data.forEach(function (value, index) {
+      data[index] = value / num;
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
   } else {
     if (num.rows !== m1.rows || num.cols !== m1.cols) {
       throw new Error("Dimensions error (".concat(m1.rows, ", ").concat(m1.cols, ") !== (").concat(num.rows, ", ").concat(num.cols, ")"));
     }
-    var _data = [];
-    for (var _row = 0; _row < m1.rows; _row += 1) {
-      _data[_row] = [];
-      for (var _col = 0; _col < m1.cols; _col += 1) {
-        _data[_row][_col] = m1.data[_row][_col] / num.data[_row][_col];
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+    var _data = _toConsumableArray(m1.data);
+    _data.forEach(function (value, index) {
+      _data[index] = value / num.data[index];
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, _data);
   }
 };
 
@@ -232,24 +235,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   dot: () => (/* binding */ dot)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var dot = function dot(m1, m2) {
   if (m1.cols !== m2.rows) {
     throw new Error("DIMENSIONS error. m1.cols ".concat(m1.rows, " ").concat(m1.cols, " !== m2.rows ").concat(m2.rows, " ").concat(m2.cols, "."));
   }
   var data = [];
-  for (var row = 0; row < m1.rows; ++row) {
+  for (var row = 0; row < m1.rows; row += 1) {
     data[row] = new Array(m2.cols);
-    for (var col = 0; col < m2.cols; ++col) {
+    for (var col = 0; col < m2.cols; col += 1) {
       data[row][col] = 0;
-      for (var i = 0; i < m1.cols; ++i) {
-        if (m1.data && m2.data) {
-          data[row][col] += m1.data[row][i] * m2.data[i][col];
+      for (var i = 0; i < m1.cols; i += 1) {
+        for (var j = 0; j < m2.rows; j += 1) {
+          data[row][col] += m1.data[row * m1.cols + i] * m2.data[j * m2.cols + col];
         }
       }
     }
   }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m2.cols, data);
+  var newData = [];
+  data.forEach(function (row) {
+    newData = [].concat(_toConsumableArray(newData), _toConsumableArray(row));
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m2.cols, newData);
 };
 
 /***/ }),
@@ -265,16 +278,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   exp: () => (/* binding */ exp)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var exp = function exp(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.exp(m1.data[row][col] + 1e-8);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.exp(value + 1e-16);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -290,16 +306,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   fraction: () => (/* binding */ fraction)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var fraction = function fraction(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = num / m1.data[row][col];
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = num / value;
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -315,16 +334,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   log: () => (/* binding */ log)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var log = function log(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.log(m1.data[row][col] + 1e-8);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.log(value + 1e-8);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -341,10 +363,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var max = function max(m1) {
   var max = -Infinity;
-  for (var row = 0; row < m1.rows; row += 1) {
-    for (var col = 0; col < m1.cols; col += 1) {
-      max = Math.max(m1.data[row][col], max);
-    }
+  for (var index = 0; index < m1.rows * m1.cols; index += 1) {
+    max = Math.max(m1.data[index], max);
   }
   return max;
 };
@@ -364,10 +384,8 @@ __webpack_require__.r(__webpack_exports__);
 var mean = function mean(m1) {
   var sum = 0;
   var numberOfElements = m1.rows * m1.cols;
-  for (var row = 0; row < m1.rows; row += 1) {
-    for (var col = 0; col < m1.cols; col += 1) {
-      sum += m1.data[row][col];
-    }
+  for (var index = 0; index < m1.rows * m1.cols; index += 1) {
+    sum += m1.data[index];
   }
   return sum / numberOfElements;
 };
@@ -385,16 +403,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   minusOne: () => (/* binding */ minusOne)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var minusOne = function minusOne(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = 1 - m1.data[row][col];
-    }
+  var data = _toConsumableArray(m1.data);
+  for (var index = 0; index < m1.rows * m1.cols; index += 1) {
+    data[index] = 1 - data[index];
   }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -410,29 +431,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   multiply: () => (/* binding */ multiply)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var multiply = function multiply(m1, num) {
   if (typeof num === "number") {
-    var data = [];
-    for (var row = 0; row < m1.rows; row += 1) {
-      data[row] = [];
-      for (var col = 0; col < m1.cols; col += 1) {
-        data[row][col] = m1.data[row][col] * num;
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+    var data = _toConsumableArray(m1.data);
+    data.forEach(function (value, index) {
+      data[index] = value * num;
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
   } else {
     if (num.rows !== m1.rows || m1.cols !== num.cols) {
       throw new Error("Dimension error: ".concat(m1.shape(), " !== ").concat(num.shape()));
     }
-    var _data = [];
-    for (var _row = 0; _row < m1.rows; _row += 1) {
-      _data[_row] = [];
-      for (var _col = 0; _col < m1.cols; _col += 1) {
-        _data[_row][_col] = m1.data[_row][_col] * num.data[_row][_col];
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+    var _data = _toConsumableArray(m1.data);
+    _data.forEach(function (value, index) {
+      _data[index] = value * num.data[index];
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, _data);
   }
 };
 
@@ -449,16 +470,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   pow: () => (/* binding */ pow)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var pow = function pow(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.pow(m1.data[row][col], num);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.pow(value, num);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -474,15 +498,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   reluBackpropagation: () => (/* binding */ reluBackpropagation)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var reluBackpropagation = function reluBackpropagation(delta, A) {
-  var data = [];
-  for (var row = 0; row < A.rows; row += 1) {
-    data[row] = new Array(A.cols);
-    for (var col = 0; col < A.cols; col += 1) {
-      data[row][col] = A.data[row][col] > 0 ? 1 : 0;
-    }
-  }
+  var data = _toConsumableArray(A.data);
+  data.forEach(function (value, index) {
+    data[index] = value > 0 ? 1 : 0;
+  });
   return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(A.rows, A.cols, data);
 };
 
@@ -503,22 +530,20 @@ __webpack_require__.r(__webpack_exports__);
 var replicate = function replicate(m1, rows, cols) {
   if (rows === 1 && m1.cols === 1 && cols > 1) {
     var newData = [];
-    for (var row = 0; row < m1.rows; row += 1) {
-      newData[row] = [];
-      for (var col = 0; col < cols; col += 1) {
-        newData[row][col] = m1.data[row][0];
+    for (var col = 0; col < cols; col += 1) {
+      for (var row = 0; row < m1.rows; row += 1) {
+        newData[row * cols + col] = m1.data[row * m1.cols];
       }
     }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(newData);
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, cols, newData);
   } else if (cols === 1 && m1.rows === 1 && rows > 1) {
     var _newData = [];
     for (var _row = 0; _row < rows; _row += 1) {
-      _newData[_row] = [];
       for (var _col = 0; _col < m1.cols; _col += 1) {
-        _newData[_row][_col] = m1.data[0][_col];
+        _newData[_row * m1.cols + _col] = m1.data[_col];
       }
     }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_newData);
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(rows, m1.cols, _newData);
   }
   return m1;
 };
@@ -539,14 +564,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var rollToColMatrix = function rollToColMatrix(m1) {
   var data = [];
-  var _row = 0;
   for (var row = 0; row < m1.rows; row += 1) {
     for (var col = 0; col < m1.cols; col += 1) {
-      data[_row] = [];
-      data[_row++][0] = m1.data[row][col];
+      data.push(m1.data[row * m1.cols + col]);
     }
   }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows * m1.cols, 1, data);
 };
 
 /***/ }),
@@ -564,11 +587,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
 
 var row = function row(m1, _row) {
+  var startIndex = _row * m1.cols;
   var data = [];
-  for (var col = 0; col < m1.cols; col += 1) {
-    data[col] = [m1.data[_row][col]];
+  for (var i = startIndex; i < startIndex + m1.cols; i += 1) {
+    data.push(m1.data[i]);
   }
-  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.cols, 1, data);
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(1, m1.cols, data);
 };
 
 /***/ }),
@@ -587,8 +611,8 @@ var rowMaxCoeffIndex = function rowMaxCoeffIndex(m1, row) {
   var maxIndex = -1;
   var max = -Infinity;
   for (var col = 0; col < m1.cols; col += 1) {
-    if (m1.data[row][col] > max) {
-      max = m1.data[row][col];
+    if (m1.data[row * m1.cols + col] > max) {
+      max = m1[row * m1.cols + col];
       maxIndex = col;
     }
   }
@@ -610,13 +634,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
 
 var rowwiseSum = function rowwiseSum(m1) {
-  var data = [[]];
+  var data = [];
   for (var row = 0; row < m1.rows; row += 1) {
     var sum = 0.0;
     for (var col = 0; col < m1.cols; col += 1) {
-      sum += m1.data[row][col];
+      sum += m1.data[row * m1.cols + col];
     }
-    data[0].push(sum);
+    data.push(sum);
   }
   return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(1, m1.rows, data);
 };
@@ -634,16 +658,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setMax: () => (/* binding */ setMax)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var setMax = function setMax(m1, max) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.min(m1.data[row][col], max);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.min(value, max);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -659,16 +686,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setMin: () => (/* binding */ setMin)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var setMin = function setMin(m1, min) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.max(m1.data[row][col], min);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.max(value, min);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -684,16 +714,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setOnes: () => (/* binding */ setOnes)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var setOnes = function setOnes(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = 1;
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = 1;
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -709,16 +742,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setRandom: () => (/* binding */ setRandom)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var setRandom = function setRandom(m1, parameter) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = (Math.random() * 4 - 2) * Math.sqrt(2 / parameter); // todo: gaussian distribution;
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = (Math.random() * 4 - 2) * Math.sqrt(2 / parameter); // todo: gaussian distribution;
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -734,16 +770,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   setZeros: () => (/* binding */ setZeros)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var setZeros = function setZeros(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = 0;
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = 0;
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -759,16 +798,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   sqrt: () => (/* binding */ sqrt)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var sqrt = function sqrt(m1) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = Math.sqrt(m1.data[row][col] + 1e-8);
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = Math.sqrt(value + 1e-8);
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -784,29 +826,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   subtract: () => (/* binding */ subtract)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var subtract = function subtract(m1, m) {
   if (typeof m === "number") {
-    var data = [];
-    for (var row = 0; row < m1.rows; row += 1) {
-      data[row] = [];
-      for (var col = 0; col < m1.cols; col += 1) {
-        data[row][col] = m1.data[row][col] - m;
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+    var data = _toConsumableArray(m1.data);
+    data.forEach(function (value, index) {
+      data[index] = value - m;
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
   } else {
     if (m1.rows !== m.rows || m1.cols !== m.cols) {
       throw new Error("Dimensions error: ".concat(m1.rows, ", ").concat(m1.cols, " !== ").concat(m.rows, ", ").concat(m.cols));
     }
-    var _data = [];
-    for (var _row = 0; _row < m1.rows; _row += 1) {
-      _data[_row] = [];
-      for (var _col = 0; _col < m1.cols; _col += 1) {
-        _data[_row][_col] = m1.data[_row][_col] - m.data[_row][_col];
-      }
-    }
-    return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(_data);
+    var _data = _toConsumableArray(m1.data);
+    _data.forEach(function (value, index) {
+      _data[index] = value - m.data[index];
+    });
+    return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, _data);
   }
 };
 
@@ -823,16 +865,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   subtractNumberFrom: () => (/* binding */ subtractNumberFrom)
 /* harmony export */ });
 /* harmony import */ var _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Math/Matrix */ "./src/typescript/Math/Matrix.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 
 var subtractNumberFrom = function subtractNumberFrom(m1, num) {
-  var data = [];
-  for (var row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (var col = 0; col < m1.cols; col += 1) {
-      data[row][col] = num - m1.data[row][col];
-    }
-  }
-  return _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix.from(data);
+  var data = _toConsumableArray(m1.data);
+  data.forEach(function (value, index) {
+    data[index] = num - value;
+  });
+  return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.rows, m1.cols, data);
 };
 
 /***/ }),
@@ -849,10 +894,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var sum = function sum(m1) {
   var sum = 0.0;
-  for (var row = 0; row < m1.rows; row += 1) {
-    for (var col = 0; col < m1.cols; col += 1) {
-      sum += m1.data[row][col];
-    }
+  for (var index = 0; index < m1.rows * m1.cols; index += 1) {
+    sum += m1.data[index];
   }
   return sum;
 };
@@ -874,9 +917,8 @@ __webpack_require__.r(__webpack_exports__);
 var transpose = function transpose(m1) {
   var data = [];
   for (var col = 0; col < m1.cols; ++col) {
-    data[col] = new Array(m1.rows);
     for (var row = 0; row < m1.rows; ++row) {
-      data[col][row] = m1.data[row][col];
+      data.push(m1.data[row * m1.cols + col]);
     }
   }
   return new _Math_Matrix__WEBPACK_IMPORTED_MODULE_0__.Matrix(m1.cols, m1.rows, data);
@@ -1192,9 +1234,11 @@ var Matrix = /*#__PURE__*/function () {
     _defineProperty(this, "rows", 0);
     _defineProperty(this, "cols", 0);
     _defineProperty(this, "data", null);
-    this.resize(rows, cols);
-    if (data) {
-      this.generateData(data);
+    this.rows = rows;
+    this.cols = cols;
+    this.data = data;
+    if (!data) {
+      this.data = new Array(rows * cols);
     }
   }
   return _createClass(Matrix, [{
@@ -1202,38 +1246,7 @@ var Matrix = /*#__PURE__*/function () {
     value: function resize(rows, cols) {
       this.rows = rows;
       this.cols = cols;
-      this.data = new Array(this.rows);
-      for (var row = 0; row < this.rows; row += 1) {
-        this.data[row] = new Array(this.cols);
-      }
-      return this;
-    }
-  }, {
-    key: "generateData",
-    value: function generateData(arr) {
-      var data = [];
-      for (var row = 0; row < this.rows; row += 1) {
-        data[row] = new Array(this.cols);
-      }
-      for (var col = 0; col < this.cols; col += 1) {
-        for (var _row2 = 0; _row2 < this.rows; _row2 += 1) {
-          if (typeof arr[_row2] === "number") {
-            data[_row2][col] = arr[_row2];
-          } else {
-            if (typeof arr[_row2][col] === "string") {
-              if (/^[0-9.]+$/.test(String(arr[_row2][col]))) {
-                data[_row2][col] = Number(arr[_row2][col]);
-              } else {
-                data[_row2][col] = arr[_row2][col];
-              }
-            } else {
-              data[_row2][col] = arr[_row2][col];
-            }
-          }
-        }
-      }
-      this.data = data;
-      return this;
+      this.data = new Array(rows * cols);
     }
   }, {
     key: "sum",

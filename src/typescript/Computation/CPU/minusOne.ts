@@ -1,12 +1,9 @@
 import { Matrix } from "../../Math/Matrix";
 
 export const minusOne = (m1: Matrix): Matrix => {
-  const data = [];
-  for (let row = 0; row < m1.rows; row += 1) {
-    data[row] = [];
-    for (let col = 0; col < m1.cols; col += 1) {
-      data[row][col] = 1 - m1.data[row][col];
-    }
+  const data = [...m1.data];
+  for (let index = 0; index < m1.rows * m1.cols; index += 1) {
+    data[index] = 1 - data[index];
   }
-  return Matrix.from(data);
+  return new Matrix(m1.rows, m1.cols, data);
 };

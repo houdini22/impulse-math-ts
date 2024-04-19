@@ -4,9 +4,9 @@ export const colwiseSum = (m1: Matrix): Matrix => {
   const data = [];
   const t = m1.transpose();
   for (let row = 0; row < t.rows; row += 1) {
-    data[row] = [0];
+    data[row] = 0;
     for (let col = 0; col < t.cols; col += 1) {
-      data[row][0] += t.data[row][col];
+      data[row] += t.data[row * t.cols + col];
     }
   }
   return new Matrix(m1.cols, 1, data);

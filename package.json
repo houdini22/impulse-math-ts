@@ -28,5 +28,5 @@
     "lint-fix": "eslint . --ext .ts --fix"
   },
   "license": "Copyright Michał Baniowski",
-  "main": "./dist/impulse-math-ts.js"
+  "main": "./dist/impulse-math-ts.dev.js"
 }

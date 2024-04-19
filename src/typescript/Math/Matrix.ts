@@ -4,50 +4,21 @@ import { minusOne } from "../Computation/CPU/minusOne";
 export class Matrix {
   public rows = 0;
   public cols = 0;
-  public data: number[][] | null = null;
+  public data: number[] | null = null;
 
-  constructor(rows = 0, cols = 0, data: number[][] | string[][] | null = null) {
-    this.resize(rows, cols);
-    if (data) {
-      this.generateData(data);
-    }
-  }
-
-  resize(rows: number, cols: number): Matrix {
+  constructor(rows = 0, cols = 0, data: number[] | null = null) {
     this.rows = rows;
     this.cols = cols;
-    this.data = new Array(this.rows);
-    for (let row = 0; row < this.rows; row += 1) {
-      this.data[row] = new Array(this.cols);
+    this.data = data;
+    if (!data) {
+      this.data = new Array(rows * cols);
     }
-
-    return this;
   }
 
-  generateData(arr: number[][] | string[][] | null): Matrix {
-    const data = [];
-    for (let row = 0; row < this.rows; row += 1) {
-      data[row] = new Array(this.cols);
-    }
-    for (let col = 0; col < this.cols; col += 1) {
-      for (let row = 0; row < this.rows; row += 1) {
-        if (typeof arr[row] === "number") {
-          data[row][col] = arr[row];
-        } else {
-          if (typeof arr[row][col] === "string") {
-            if (/^[0-9.]+$/.test(String(arr[row][col]))) {
-              data[row][col] = Number(arr[row][col]);
-            } else {
-              data[row][col] = arr[row][col];
-            }
-          } else {
-            data[row][col] = arr[row][col];
-          }
-        }
-      }
-    }
-    this.data = data;
-    return this;
+  resize(rows: number, cols: number) {
+    this.rows = rows;
+    this.cols = cols;
+    this.data = new Array(rows * cols);
   }
 
   sum(): number {
@@ -108,6 +79,7 @@ export class Matrix {
   row(row: number): Matrix {
     return getComputation().execute("row", this, row) as Matrix;
   }
+
   sigmoid() {
     return this.multiply(-1).exp().add(1).fraction(1);
   }
